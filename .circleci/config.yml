@@ -1,0 +1,73 @@
+aliases:
+  - &restore-monorepo-cache
+    keys:
+      - dependencies-{{ checksum "yarn.lock" }}
+      - dependencies-
+
+  - &restore-packages-cache
+    keys:
+      - dependencies-packages-v1-{{ checksum "packages_checksum" }}
+      - dependencies-packages-v1-
+
+  - &save-monorepo-cache
+    paths:
+      - node_modules
+    key: dependencies-{{ checksum "yarn.lock" }}
+
+  - &save-packages-cache
+    paths:
+      - packages/react-schema/node_modules
+      - packages/react-schema-form/node_modules
+      - packages/validation/node_modules
+    key: dependencies-packages-v1-{{ checksum "packages_checksum" }}
+
+defaults:
+  - &job-defaults
+      working_directory: ~/react-schema
+      docker:
+        - image: circleci/node:8.11.2-jessie
+
+version: 2
+jobs:
+  setup:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/react-schema
+
+      - run:
+          command: cat packages/*/yarn.lock > packages_checksum
+          name: Creating checksum file for packages/* packages
+
+      - restore_cache: *restore-monorepo-cache
+      - restore_cache: *restore-packages-cache
+
+      - run: yarn install
+      - run: yarn bootstrap
+
+      - save_cache: *save-monorepo-cache
+      - save_cache: *save-packages-cache
+
+      - persist_to_workspace:
+          root: .
+          paths: .
+
+  test:
+    <<: *job-defaults
+    steps:
+      - attach_workspace:
+          at: ~/react-schema
+      - run:
+          command: yarn lint
+      - run:
+          command: yarn test
+
+workflows:
+  version: 2
+  default-workflow:
+    jobs:
+      - setup:
+      - test:
+          requires:
+            - setup

@@ -1,0 +1,25 @@
+{
+  "name": "@traveloka/react-schema",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "lerna": "^3.0.0-rc.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.1",
+    "ts-jest": "20.0.14",
+    "typescript": "^3.0.1"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "lint": "lerna run lint",
+    "test": "lerna run test",
+    "watch": "lerna run watch --parallel"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testURL": "http://localhost"
+  }
+}
