@@ -13,6 +13,7 @@ interface FieldInterface {
 
 type FieldProps = {
   fieldComponent: React.ComponentClass<any>,
+  onChange?: (value:any) => void,
   fieldProps?: object,
   defaultValue?: any,
   rules?: Rule
@@ -48,9 +49,7 @@ export class Field extends React.Component<FieldProps, FieldState> implements Fi
   public validate = () => {
     const { rules = [] } = this.props;
     const error = validate(rules)(this.getValue);
-    this.setState({
-      error,
-    });
+    this.setError(error);
     return error;
   }
 
@@ -58,20 +57,32 @@ export class Field extends React.Component<FieldProps, FieldState> implements Fi
     return this.state.value;
   }
 
+  public setValue = (value: any) => {
+    this.setState({
+      value
+    });
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
+  }
+
   public getError = () => {
     return this.state.error;
   }
 
-  public reset = () => {
+  public setError = (error: ValidationResult) => {
     this.setState({
-      value: null,
-      error: null,
-    })
+      error
+    });
+    return error;
+  }
+
+  public reset = () => {
+    this.setValue(null);
+    this.setError(null);
   }
 
   private handleOnChange = (value: any) => {
-    this.setState({
-      value
-    })
+    return this.setValue(value);
   }
 }

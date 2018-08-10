@@ -120,4 +120,30 @@ describe('test createForm', () => {
       age: null,
     });
   });
+
+  it('should trigger onChange for given field', () => {
+    class Input extends React.Component {
+      public render() {
+        return <input {...this.props} />
+      }
+    }
+    const Form = createForm({
+      email: Input,
+      age: Input,
+    });
+    let form = null;
+    const onChangeMock = jest.fn();
+    TestRenderer.create(
+      <Form
+        ref={el => form = el}
+        onChange={onChangeMock}
+      />
+    );
+    form.fields['email'].setValue('jacky.wijaya@traveloka.com');
+    form.fields['age'].setValue(17);
+    expect(onChangeMock.mock.calls.length).toEqual(2);
+    const [ onChangeEmail, onChangeAge ] = onChangeMock.mock.calls;
+    expect(onChangeEmail).toEqual(['email', 'jacky.wijaya@traveloka.com']);
+    expect(onChangeAge).toEqual(['age', 17]);
+  });
 });

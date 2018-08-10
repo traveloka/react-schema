@@ -93,4 +93,20 @@ describe('test Field Component', () => {
     field.validate();
     expect(fieldComponent.props.error).toBeFalsy();
   });
+
+  it('should have onChange callback', () => {
+    let field = null;
+    const onChangeMock = jest.fn();
+    const testRenderer = TestRenderer.create(
+      <Field
+        fieldComponent={FieldComponent}
+        ref={el => field = el}
+        onChange={onChangeMock}
+      />
+    );
+    const testInstance = testRenderer.root;
+    const fieldComponent = testInstance.findByType(FieldComponent);
+    field.setValue('test');
+    expect(onChangeMock.mock.calls.length).toEqual(1);
+  });
 });
