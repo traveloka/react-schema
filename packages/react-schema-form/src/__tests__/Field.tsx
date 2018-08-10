@@ -107,6 +107,6 @@ describe('test Field Component', () => {
     const testInstance = testRenderer.root;
     const fieldComponent = testInstance.findByType(FieldComponent);
     field.setValue('test');
-    expect(onChangeMock.mock.calls.length).toEqual(1);
+    expect(onChangeMock).toHaveBeenCalledTimes(1);
   });
 });
