@@ -15,6 +15,7 @@ interface FieldInterface {
 };
 
 type FieldProps = {
+  name: string,
   fieldComponent: React.ComponentClass<any>,
   onChange?: (value:any) => void,
   fieldProps?: object,
@@ -38,10 +39,11 @@ export class Field extends React.Component<FieldProps, FieldState> implements Fi
   }
 
   public render() {
-    const { fieldComponent: FieldComponent, fieldProps } = this.props;
+    const { name, fieldComponent: FieldComponent, fieldProps } = this.props;
     return (
       <FieldComponent
         {...fieldProps}
+        name={name}
         value={this.getValue()}
         error={this.getError()}
         onChange={this.handleOnChange}
