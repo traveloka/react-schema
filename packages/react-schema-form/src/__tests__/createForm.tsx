@@ -37,7 +37,7 @@ describe('test createForm', () => {
     expect(testInstance.findByType(Input)).toBeTruthy();
   });
 
-  it('should have pass fieldProps, and fieldComponent', () => {
+  it('[props] should have pass fieldProps, and fieldComponent', () => {
     class Input extends React.Component {
       public render() {
         return <input {...this.props} />
@@ -64,7 +64,32 @@ describe('test createForm', () => {
     expect(FieldEl).toBeTruthy();
   });
 
-  it('should able get value of field', () => {
+  it('[props] should trigger onChange for given field', () => {
+    class Input extends React.Component {
+      public render() {
+        return <input {...this.props} />
+      }
+    }
+    const Form = createForm({
+      email: Input,
+      age: Input,
+    });
+    let form = null;
+    const onChangeMock = jest.fn();
+    TestRenderer.create(
+      <Form
+        ref={el => form = el}
+        onChange={onChangeMock}
+      />
+    );
+    form.fields['email'].setValue('jacky.wijaya@traveloka.com');
+    form.fields['age'].setValue(17);
+    expect(onChangeMock).toHaveBeenCalledTimes(2);
+    expect(onChangeMock).toHaveBeenCalledWith('email', 'jacky.wijaya@traveloka.com');
+    expect(onChangeMock).toHaveBeenCalledWith('age', 17);
+  });
+
+  it('[instance] getValue and getValues should be working as expected', () => {
     class Input extends React.Component {
       public render() {
         return <input {...this.props} />
@@ -92,7 +117,7 @@ describe('test createForm', () => {
     });
   });
 
-  it('should validate all fields', () => {
+  it('[instance] should validate all fields', () => {
     const invalid = () => 'invalid';
     const valid = () => null;
     class Input extends React.Component {
@@ -121,7 +146,7 @@ describe('test createForm', () => {
     });
   });
 
-  it('should trigger onChange for given field', () => {
+  it('[instance] setValue, setValues, getValue, getValues should work as expected', () => {
     class Input extends React.Component {
       public render() {
         return <input {...this.props} />
@@ -132,18 +157,59 @@ describe('test createForm', () => {
       age: Input,
     });
     let form = null;
-    const onChangeMock = jest.fn();
     TestRenderer.create(
       <Form
         ref={el => form = el}
-        onChange={onChangeMock}
       />
     );
     form.fields['email'].setValue('jacky.wijaya@traveloka.com');
     form.fields['age'].setValue(17);
-    expect(onChangeMock.mock.calls.length).toEqual(2);
-    const [ onChangeEmail, onChangeAge ] = onChangeMock.mock.calls;
-    expect(onChangeEmail).toEqual(['email', 'jacky.wijaya@traveloka.com']);
-    expect(onChangeAge).toEqual(['age', 17]);
+    expect(form.fields['email'].getValue()).toEqual('jacky.wijaya@traveloka.com');
+    expect(form.fields['age'].getValue()).toEqual(17);
+    expect(form.getValues()).toMatchObject({
+      email: 'jacky.wijaya@traveloka.com',
+      age: 17,
+    });
+    form.setValues({
+      age: 21,
+    });
+    expect(form.getValues()).toMatchObject({
+      email: 'jacky.wijaya@traveloka.com',
+      age: 21,
+    });
+  });
+
+  it('[instance] setError, setErrors, getError, and getErrors should work as expected', () => {
+    class Input extends React.Component {
+      public render() {
+        return <input {...this.props} />
+      }
+    }
+    const Form = createForm({
+      email: Input,
+      age: Input,
+    });
+    let form = null;
+    TestRenderer.create(
+      <Form
+        ref={el => form = el}
+      />
+    );
+    form.fields['email'].setError('required');
+    form.fields['age'].setError('not empty');
+    expect(form.fields['email'].getError()).toEqual('required');
+    expect(form.fields['age'].getError()).toEqual('not empty');
+    expect(form.getErrors()).toMatchObject({
+      email: 'required',
+      age: 'not empty',
+    });
+    form.setErrors({
+      email: null,
+      age: 'required',
+    });
+    expect(form.getErrors()).toMatchObject({
+      email: null,
+      age: 'required',
+    });
   });
 });

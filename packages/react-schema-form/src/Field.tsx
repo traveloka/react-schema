@@ -7,6 +7,9 @@ import {
 
 interface FieldInterface {
   getValue: () => any,
+  setValue: (value: any) => any,
+  getError: () => ValidationResult,
+  setError: (error: ValidationResult) => ValidationResult,
   validate: () => ValidationResult,
   reset: () => void,
 };
