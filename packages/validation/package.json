@@ -1,6 +1,6 @@
 {
   "name": "@traveloka/validation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
   "license": "MIT",
@@ -40,7 +40,9 @@
       "js",
       "json"
     ],
-    "collectCoverageFrom": ["src/**/*.ts"],
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
     "testURL": "http://localhost",
     "coverageDirectory": "./coverage/",
     "collectCoverage": true

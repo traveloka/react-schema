@@ -1,6 +1,6 @@
 {
   "name": "@traveloka/react-schema",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
@@ -15,7 +15,6 @@
     "watch": "tsc -w -p .",
     "prepublish": "npm run build"
   },
-  "dependencies": {},
   "peerDependencies": {
     "react": "*"
   },
@@ -65,7 +64,9 @@
       "js"
     ],
     "testURL": "http://localhost",
-    "collectCoverageFrom": ["src/**/*.ts"],
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
     "coverageDirectory": "./coverage/",
     "collectCoverage": true
   }
