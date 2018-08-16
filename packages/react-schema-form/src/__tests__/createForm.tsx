@@ -140,6 +140,11 @@ describe('test createForm', () => {
       <Form ref={el => form = el} />
     );
     const result = form.validate();
+    const errors = form.getErrors();
+    expect(result).toMatchObject({
+      email: 'invalid',
+      age: null,
+    });
     expect(result).toMatchObject({
       email: 'invalid',
       age: null,
@@ -237,5 +242,10 @@ describe('test createForm', () => {
       email: null,
       age: 'required',
     });
+    form.setErrors({
+      email: null,
+      age: null,
+    });
+    expect(form.getErrors()).toEqual(null);
   });
 });

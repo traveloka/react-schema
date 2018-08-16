@@ -26,7 +26,7 @@ describe('test Field Component', () => {
     expect(testInstance.findByType(FieldComponent).props.hello).toEqual('World');
   });
 
-  it('should have expected value', () => {
+  it('should have expected value and error', () => {
     let field = null;
     const testRenderer = TestRenderer.create(
       <Field
@@ -38,9 +38,14 @@ describe('test Field Component', () => {
     const fieldComponent = testInstance.findByType(FieldComponent);
     expect(fieldComponent.props.value).toBeFalsy();
     fieldComponent.props.onChange('new value');
+    field.setError('new error');
     expect(fieldComponent.props.value).toEqual('new value');
+    expect(fieldComponent.props.error).toEqual('new error');
     field.reset();
     expect(fieldComponent.props.value).toBeFalsy();
+    expect(fieldComponent.props.error).toBeFalsy();
+    expect(field.getValue()).toBeFalsy();
+    expect(field.getError()).toBeFalsy();
   });
 
 

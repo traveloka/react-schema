@@ -110,8 +110,12 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
     }
 
     public validate = (): ValidationResultByName | null => {
-      Object.keys(schemaEntity).map(this.validateField);
-      return this.getErrors();
+      const errors = Object.keys(schemaEntity).reduce((values, name) => ({
+        ...values,
+        [name]: this.validateField(name),
+      }), {});
+      if (Object.values(errors).filter(Boolean).length === 0) return null;
+      return errors;
     }
   }
   return Component;
