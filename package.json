@@ -16,6 +16,7 @@
     "lint": "lerna run lint",
     "test": "lerna run test",
     "watch": "lerna run watch --parallel",
+    "publish": "npm run publish:git",
     "publish:git": "lerna publish --conventional-commits --yes --skip-npm",
     "publish:npm": "lerna exec -- npm publish"
   },
