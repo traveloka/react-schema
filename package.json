@@ -18,7 +18,7 @@
     "watch": "lerna run watch --parallel",
     "publish": "npm run publish:git",
     "publish:git": "lerna publish --conventional-commits --yes --skip-npm",
-    "publish:npm": "lerna exec -- npm publish --silent"
+    "publish:npm": "lerna exec npm publish --since"
   },
   "config": {
     "commitizen": {

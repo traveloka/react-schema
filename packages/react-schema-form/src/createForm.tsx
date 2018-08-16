@@ -5,6 +5,7 @@ import {
   getReactEntityComponent,
   createSchema
 } from '@traveloka/react-schema';
+
 import { Field } from './Field';
 import { ValidationResult } from '../node_modules/@traveloka/validation';
 
