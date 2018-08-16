@@ -8,13 +8,21 @@
   "devDependencies": {
     "@types/jest": "^23.3.1",
     "ts-jest": "20.0.14",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "cz-conventional-changelog": "^2.1.0"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "lint": "lerna run lint",
     "test": "lerna run test",
-    "watch": "lerna run watch --parallel"
+    "watch": "lerna run watch --parallel",
+    "publish:git": "lerna publish --conventional-commits --yes --skip-npm",
+    "publish:npm": "lerna exec -- npm publish"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
   "jest": {
     "transform": {

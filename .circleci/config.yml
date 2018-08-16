@@ -63,11 +63,35 @@ jobs:
       - run:
           command: yarn test
 
+  publish:
+    <<: *job-defaults
+    steps:
+      - attach_workspace:
+          at: ~/react-schema
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run: npm run publish:npm
+
 workflows:
   version: 2
   default-workflow:
     jobs:
-      - setup
+      - setup:
+          filters:
+            tags:
+              only: /^v.*/
       - test:
           requires:
             - setup
+          filters:
+            tags:
+              only: /^v.*/
+      - publish:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
