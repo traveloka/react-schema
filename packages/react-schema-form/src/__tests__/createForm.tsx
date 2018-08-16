@@ -146,6 +146,32 @@ describe('test createForm', () => {
     });
   });
 
+
+  it('[instance] validate should return null when all fields is valid', () => {
+    const valid = () => null;
+    class Input extends React.Component {
+      public render() {
+        return <input {...this.props} />
+      }
+    }
+    const Form = createForm({
+      email: {
+        component: Input,
+        rules: valid
+      },
+      age: {
+        component: Input,
+        rules: [valid, valid]
+      }
+    });
+    let form = null;
+    TestRenderer.create(
+      <Form ref={el => form = el} />
+    );
+    const result = form.validate();
+    expect(result).toBeFalsy();
+  });
+
   it('[instance] setValue, setValues, getValue, getValues should work as expected', () => {
     class Input extends React.Component {
       public render() {

@@ -10,7 +10,7 @@ import { ValidationResult } from '../node_modules/@traveloka/validation';
 
 type ValidationResultByName = {
   [name: string]: ValidationResult
-}
+};
 
 interface Form {
   getValue: (name:string) => any,
@@ -18,10 +18,10 @@ interface Form {
   setValue: (name:string, value: any) => any,
   setValues: (value: {[name: string]: any}) => any,
   getError: (name: string) => ValidationResult,
-  getErrors: () => ValidationResultByName,
+  getErrors: () => ValidationResultByName | null,
   setError: (name: string, error: ValidationResult) => ValidationResult,
   setErrors: (errors: ValidationResultByName) => ValidationResultByName,
-  validate: () => ValidationResultByName,
+  validate: () => ValidationResultByName | null,
   validateField: (name: string) => ValidationResult,
 }
 
@@ -86,18 +86,20 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
       return this.fields[name].getError();
     }
 
-    public getErrors = ():{[name: string]: ValidationResult} => {
-      return Object.keys(schemaEntity).reduce((values, name) => ({
+    public getErrors = (): ValidationResultByName | null => {
+      const errors = Object.keys(schemaEntity).reduce((values, name) => ({
         ...values,
         [name]: this.getError(name),
-      }), {})
+      }), {});
+      if (Object.values(errors).filter(Boolean).length === 0) return null;
+      return errors;
     }
 
     public setError = (name: string, error: ValidationResult): ValidationResult => {
       return this.fields[name].setError(error);
     }
 
-    public setErrors = (errors: {[name: string]: ValidationResult}): any => {
+    public setErrors = (errors:  ValidationResultByName): any => {
       Object.entries(errors).map(([name, error]) => this.setError(name, error));
       return this.getErrors();
     }
@@ -106,7 +108,7 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
       return this.fields[name].validate();
     }
 
-    public validate = ():{[name: string]: ValidationResult} => {
+    public validate = (): ValidationResultByName | null => {
       Object.keys(schemaEntity).map(this.validateField);
       return this.getErrors();
     }
