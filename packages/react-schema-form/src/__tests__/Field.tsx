@@ -114,4 +114,34 @@ describe('test Field Component', () => {
     field.setValue('test');
     expect(onChangeMock).toHaveBeenCalledTimes(1);
   });
+
+  it('should rules must be passed with value', () => {
+    const rule = jest.fn();
+    let field = null;
+    const testRenderer = TestRenderer.create(
+      <Field
+        fieldComponent={FieldComponent}
+        rules={rule}
+        ref={el => field = el}
+      />
+    );
+    field.setValue('test');
+    field.validate();
+    expect(rule).toBeCalledWith('test');
+  });
+
+  it('should rules must be passed with value (array)', () => {
+    const rule = jest.fn();
+    let field = null;
+    const testRenderer = TestRenderer.create(
+      <Field
+        fieldComponent={FieldComponent}
+        rules={[rule]}
+        ref={el => field = el}
+      />
+    );
+    field.setValue('test');
+    field.validate();
+    expect(rule).toBeCalledWith('test');
+  });
 });

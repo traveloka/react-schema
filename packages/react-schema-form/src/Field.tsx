@@ -15,7 +15,7 @@ interface FieldInterface {
 };
 
 type FieldProps = {
-  name: string,
+  name?: string,
   fieldComponent: React.ComponentClass<any>,
   onChange?: (value:any) => void,
   fieldProps?: object,
@@ -53,7 +53,7 @@ export class Field extends React.Component<FieldProps, FieldState> implements Fi
 
   public validate = () => {
     const { rules = [] } = this.props;
-    const error = validate(rules)(this.getValue);
+    const error = validate(rules)(this.getValue());
     this.setError(error);
     return error;
   }
