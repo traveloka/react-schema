@@ -56,7 +56,7 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
       return (
         <SchemaComponent
           ref={(el: any) => {
-            this.fields = el.entities;
+            this.fields = el && el.entities;
           }}
         />
       )
