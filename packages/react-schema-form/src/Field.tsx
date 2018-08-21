@@ -16,6 +16,7 @@ interface FieldInterface {
 
 type FieldProps = {
   name?: string,
+  label?: string,
   fieldComponent: React.ComponentClass<any>,
   onChange?: (value:any) => void,
   fieldProps?: object,
@@ -40,8 +41,10 @@ export class Field extends React.Component<FieldProps, FieldState> implements Fi
 
   public render() {
     const { name, fieldComponent: FieldComponent, fieldProps } = this.props;
+    const label = this.ucwords(name);
     return (
       <FieldComponent
+        label={label}
         {...fieldProps}
         name={name}
         value={this.getValue()}
@@ -89,5 +92,12 @@ export class Field extends React.Component<FieldProps, FieldState> implements Fi
 
   private handleOnChange = (value: any) => {
     return this.setValue(value);
+  }
+
+  private ucwords = (str ?: string) => {
+    if (!str) return null;
+    return str.toLowerCase().replace(/\b[a-z]/g, letter => {
+      return letter.toUpperCase();
+    });
   }
 }
