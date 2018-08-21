@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.4"></a>
+## [1.0.4](https://github.com/Jekiwijaya/react-schema/compare/v1.0.3...v1.0.4) (2018-08-21)
+
+
+### Bug Fixes
+
+* **field:** add label property. ([34da58d](https://github.com/Jekiwijaya/react-schema/commit/34da58d))
+
+
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/Jekiwijaya/react-schema/compare/v1.0.2...v1.0.3) (2018-08-16)
 
