@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ComponentEntity, ObjectComponent } from "../types";
 
 function isObjectComponent(entity: ComponentEntity): entity is ObjectComponent {
-  return 'component' in entity;
+  return typeof entity === 'object' && 'component' in entity;
 }
 
 export function getReactEntityComponent(entity: ComponentEntity): React.ComponentClass<any> {
