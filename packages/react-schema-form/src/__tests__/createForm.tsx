@@ -79,7 +79,7 @@ describe('test createForm', () => {
     TestRenderer.create(
       <Form
         ref={el => form = el}
-        onChange={onChangeMock}
+        onChangeField={onChangeMock}
       />
     );
     form.fields['email'].setValue('jacky.wijaya@traveloka.com');
