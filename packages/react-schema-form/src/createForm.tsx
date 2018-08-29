@@ -30,7 +30,7 @@ type FieldByName = {
 }
 
 type FormProps = {
-  onChange: (name: string, value: any) => void,
+  onChangeField: (name: string, value: any) => void,
 }
 
 export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any> {
@@ -44,7 +44,7 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
         const { defaultValue, rules, ...fieldProps } = getEntityProps(fieldComponent);
         formEntity[name] = {
           component: Field,
-          onChange: (value:any) => this.props.onChange && this.props.onChange(name, value),
+          onChange: (value:any) => this.props.onChangeField && this.props.onChangeField(name, value),
           rules,
           defaultValue,
           name,
