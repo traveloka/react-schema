@@ -38,7 +38,44 @@ describe('test createForm', () => {
       const testInstance = testRenderer.root;
       expect(testInstance.findByType(Input)).toBeTruthy();
     });
+
+    it('value should not gone', () => {
+
+      class Input extends React.Component {
+        public render() {
+          return <input {...this.props} />
+        }
+      }
+      const Form = createForm({
+        email: {
+          component: Input
+        }
+      });
+      class Container extends React.Component<any, any> {
+        public state = {
+          counter: 1
+        }
+        public render() {
+          return (
+            <div>
+              <Form />
+            </div>
+          );
+        }
+      }
+      const testRenderer = TestRenderer.create(
+        <Container />
+      );
+      const testInstance = testRenderer.root;
+      let inputInstance = testInstance.findByType(Input);
+      inputInstance.props.onChange('value');
+      expect(inputInstance.props.value).toEqual('value');
+      const containerInstance = testInstance.findByType(Container).instance;
+      containerInstance.setState({ counter: 2 });
+      expect(inputInstance.props.value).toEqual('value');
+    });
   });
+
   describe('test field component', () => {
 
     it('[props] should have pass fieldProps, and fieldComponent', () => {
