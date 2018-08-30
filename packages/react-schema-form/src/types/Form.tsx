@@ -1,3 +1,41 @@
-import { Validation } from '@traveloka/validation';
+import { Validation, ValidationResult } from '@traveloka/validation';
 
 export type Rule = Validation | Validation[];
+export type FormFieldValidationResult = ValidationResult | ValidationResultByName;
+
+export type ValidationResultByName = {
+  [name: string]: ValidationResult
+} | null;
+
+export interface FormFieldInterface {
+  getValue: () => any,
+  setValue: (value: any) => any,
+  getError: () => FormFieldValidationResult | null,
+  setError: (error: FormFieldValidationResult) => FormFieldValidationResult,
+  validate: () => FormFieldValidationResult,
+  reset: () => void,
+}
+
+export interface FieldInterface extends FormFieldInterface {
+  getValue: () => any,
+  setValue: (value: any) => any,
+  getError: () => ValidationResult,
+  setError: (error: ValidationResult) => ValidationResult,
+  validate: () => ValidationResult,
+  reset: () => void,
+}
+
+export interface FormInterface extends FormFieldInterface {
+  getValue: () => any,
+  setValue: (value: any) => any,
+  getError: () => ValidationResultByName,
+  setError: (error: FormFieldValidationResult) => ValidationResultByName,
+  validate: () => ValidationResultByName,
+  reset: () => void,
+
+  getValueField: (name: string) => any,
+  setValueField: (name: string, value: any) => any,
+  getErrorField: (name: string) => FormFieldValidationResult,
+  setErrorField: (name: string, error: FormFieldValidationResult) => FormFieldValidationResult,
+  validateField: (name: string) => FormFieldValidationResult,
+}

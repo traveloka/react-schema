@@ -3,68 +3,73 @@ import * as TestRenderer from 'react-test-renderer';
 import { createForm } from '../createForm';
 
 describe('test createForm', () => {
-  it('should able render component', () => {
-    class Input extends React.Component {
-      public render() {
-        return <input {...this.props} />
+  describe('test render entity component', () => {
+
+    it('should able render component', () => {
+      class Input extends React.Component {
+        public render() {
+          return <input {...this.props} />
+        }
       }
-    }
-    const Form = createForm({
-      email: Input
+      const Form = createForm({
+        email: Input
+      });
+      const testRenderer = TestRenderer.create(
+        <Form />
+      );
+      const testInstance = testRenderer.root;
+      expect(testInstance.findByType(Input)).toBeTruthy();
     });
-    const testRenderer = TestRenderer.create(
-      <Form />
-    );
-    const testInstance = testRenderer.root;
-    expect(testInstance.findByType(Input)).toBeTruthy();
+
+    it('should able render component as object', () => {
+      class Input extends React.Component {
+        public render() {
+          return <input {...this.props} />
+        }
+      }
+      const Form = createForm({
+        email: {
+          component: Input
+        }
+      });
+      const testRenderer = TestRenderer.create(
+        <Form />
+      );
+      const testInstance = testRenderer.root;
+      expect(testInstance.findByType(Input)).toBeTruthy();
+    });
+  });
+  describe('test field component', () => {
+
+    it('[props] should have pass fieldProps, and fieldComponent', () => {
+      class Input extends React.Component {
+        public render() {
+          return <input {...this.props} />
+        }
+      }
+      const Form = createForm({
+        email: {
+          component: Input,
+          defaultValue: 'test',
+        },
+      });
+      const testRenderer = TestRenderer.create(
+        <Form />
+      );
+      const testInstance = testRenderer.root;
+      let FieldEl = null;
+      FieldEl = testInstance.findByProps({
+        fieldComponent: Input
+      });
+      expect(FieldEl).toBeTruthy();
+      FieldEl = testInstance.findByProps({
+        defaultValue: 'test'
+      });
+      expect(FieldEl).toBeTruthy();
+    });
   });
 
-  it('should able render component as object', () => {
-    class Input extends React.Component {
-      public render() {
-        return <input {...this.props} />
-      }
-    }
-    const Form = createForm({
-      email: {
-        component: Input
-      }
-    });
-    const testRenderer = TestRenderer.create(
-      <Form />
-    );
-    const testInstance = testRenderer.root;
-    expect(testInstance.findByType(Input)).toBeTruthy();
-  });
-
-  it('[props] should have pass fieldProps, and fieldComponent', () => {
-    class Input extends React.Component {
-      public render() {
-        return <input {...this.props} />
-      }
-    }
-    const Form = createForm({
-      email: {
-        component: Input,
-        defaultValue: 'test',
-      },
-    });
-    const testRenderer = TestRenderer.create(
-      <Form />
-    );
-    const testInstance = testRenderer.root;
-    let FieldEl = null;
-    FieldEl = testInstance.findByProps({
-      fieldComponent: Input
-    });
-    expect(FieldEl).toBeTruthy();
-    FieldEl = testInstance.findByProps({
-      defaultValue: 'test'
-    });
-    expect(FieldEl).toBeTruthy();
-  });
-
-  it('[props] should trigger onChange for given field', () => {
+  it('[props] should trigger onChangeField for given field', () => {
     class Input extends React.Component {
       public render() {
         return <input {...this.props} />
@@ -89,7 +94,7 @@ describe('test createForm', () => {
     expect(onChangeMock).toHaveBeenCalledWith('age', 17);
   });
 
-  it('[instance] getValue and getValues should be working as expected', () => {
+  it('[instance] getValueField and getValues should be working as expected', () => {
     class Input extends React.Component {
       public render() {
         return <input {...this.props} />
@@ -109,9 +114,13 @@ describe('test createForm', () => {
     TestRenderer.create(
       <Form ref={el => form = el} />
     );
-    expect(form.getValue('email')).toEqual('test');
-    expect(form.getValue('age')).toEqual(12);
+    expect(form.getValueField('email')).toEqual('test');
+    expect(form.getValueField('age')).toEqual(12);
     expect(form.getValues()).toMatchObject({
+      email: 'test',
+      age: 12,
+    });
+    expect(form.getValue()).toMatchObject({
       email: 'test',
       age: 12,
     });
@@ -226,6 +235,7 @@ describe('test createForm', () => {
         ref={el => form = el}
       />
     );
+    form.setErrors();
     form.fields['email'].setError('required');
     form.fields['age'].setError('not empty');
     expect(form.fields['email'].getError()).toEqual('required');
@@ -247,5 +257,196 @@ describe('test createForm', () => {
       age: null,
     });
     expect(form.getErrors()).toEqual(null);
+  });
+
+  it('[props] value, should accept property value and distribute to fields', () => {
+    class Input extends React.Component {
+      public render() {
+        return <input {...this.props} />
+      }
+    }
+    const Form = createForm({
+      email: Input,
+      age: Input,
+    });
+    let form = null;
+    TestRenderer.create(
+      <Form
+        ref={el => form = el}
+        value={{
+          email: 'test@traveloka.com',
+          age: 17,
+        }}
+      />
+    );
+    expect(form.getValues()).toMatchObject({
+      email: 'test@traveloka.com',
+      age: 17,
+    });
+  });
+
+  describe('test nested form', () => {
+    it('[instance] should able handle setValues and getValues', () => {
+      class Input extends React.Component {
+        public render() {
+          return <input {...this.props} />
+        }
+      }
+      const Form = createForm({
+        profile: createForm({
+          name: Input,
+          age: Input,
+        }),
+        additional: createForm({
+          gender: Input,
+          city: Input,
+        })
+      });
+      let form = null;
+      TestRenderer.create(
+        <Form
+          ref={el => form = el}
+        />
+      );
+      form.setValues({
+        profile: {
+          name: 'Bob',
+          age: 17,
+        },
+        additional: {
+          gender: 'Male',
+          city: 'Jakarta'
+        }
+      });
+      expect(form.fields['profile'].getValues()).toMatchObject({
+        name: 'Bob',
+        age: 17,
+      })
+    });
+
+    it('[instance] should able handle reset', () => {
+      class Input extends React.Component {
+        public render() {
+          return <input {...this.props} />
+        }
+      }
+      const Form = createForm({
+        profile: createForm({
+          name: Input,
+          age: Input,
+        }),
+        additional: createForm({
+          gender: Input,
+          city: Input,
+        })
+      });
+      let form = null;
+      TestRenderer.create(
+        <Form
+          ref={el => form = el}
+        />
+      );
+      form.setValues({
+        profile: {
+          name: 'Bob',
+          age: 17,
+        },
+        additional: {
+          gender: 'Male',
+          city: 'Jakarta'
+        }
+      });
+      expect(form.fields['profile'].getValues()).toMatchObject({
+        name: 'Bob',
+        age: 17,
+      });
+      form.reset();
+      expect(form.getValues()).toMatchObject({
+        profile: {
+          name: null,
+          age: null,
+        },
+        additional: {
+          gender: null,
+          city: null
+        }
+      });
+    });
+
+    it('[props] onChangeField should be trigger', () => {
+      const onChangeMock = jest.fn();
+      class Input extends React.Component {
+        public render() {
+          return <input {...this.props} />
+        }
+      }
+      const Form = createForm({
+        profile: createForm({
+          name: Input,
+          age: Input,
+        }),
+        additional: createForm({
+          gender: Input,
+          city: Input,
+        })
+      });
+      let form = null;
+      TestRenderer.create(
+        <Form
+          ref={el => form = el}
+          onChangeField={onChangeMock}
+        />
+      );
+      form.setValues({
+        profile: {
+          name: 'Bob',
+          age: 17,
+        },
+      });
+      expect(onChangeMock).toHaveBeenCalledTimes(2);
+      expect(onChangeMock).toBeCalledWith('profile.name', 'Bob');
+      expect(onChangeMock).toBeCalledWith('profile.age', 17);
+    });
+
+    it('[props] value should be passed', () => {
+      class Input extends React.Component {
+        public render() {
+          return <input {...this.props} />
+        }
+      }
+      const Form = createForm({
+        profile: createForm({
+          name: Input,
+          age: Input,
+        }),
+        additional: createForm({
+          gender: Input,
+          city: Input,
+        })
+      });
+      let form = null;
+      TestRenderer.create(
+        <Form
+          ref={el => form = el}
+          value={{
+            profile: {
+              name: 'Bob',
+            },
+            additional: {
+              city: 'Jakarta',
+            }
+          }}
+
+        />
+      );
+      form.getValues({
+        profile: {
+          name: 'Bob',
+        },
+        additional: {
+          city: 'Jakarta',
+        },
+      });
+    });
   });
 });
