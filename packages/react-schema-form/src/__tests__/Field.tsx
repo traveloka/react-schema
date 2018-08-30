@@ -144,4 +144,21 @@ describe('test Field Component', () => {
     field.validate();
     expect(rule).toBeCalledWith('test');
   });
+
+  it('[props] value, should use value from props', () => {
+    let field = null;
+    const onChangeMock = jest.fn();
+    const testRenderer = TestRenderer.create(
+      <Field
+        fieldComponent={FieldComponent}
+        value={'test-value'}
+        ref={el => field = el}
+        onChange={onChangeMock}
+      />
+    );
+    expect(field.getValue()).toEqual('test-value');
+    field.setValue('new-value');
+    expect(onChangeMock).toHaveBeenCalledTimes(1);
+    expect(onChangeMock).toBeCalledWith('new-value');
+  });
 });

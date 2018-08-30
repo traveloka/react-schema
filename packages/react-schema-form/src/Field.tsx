@@ -15,6 +15,7 @@ interface FieldInterface {
 };
 
 type FieldProps = {
+  value?: any,
   name?: string,
   label?: string,
   fieldComponent: React.ComponentClass<any>,
@@ -62,6 +63,9 @@ export class Field extends React.Component<FieldProps, FieldState> implements Fi
   }
 
   public getValue = () => {
+    if (this.props.value !== undefined) {
+      return this.props.value;
+    }
     return this.state.value;
   }
 
