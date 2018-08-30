@@ -36,8 +36,10 @@ type FormProps = {
 export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any> {
   const Component = class FormComponent extends React.Component<FormProps> implements Form {
     public fields: FieldByName = {};
+    private SchemaComponent: React.ComponentClass<any, any>;
 
-    public render() {
+    constructor(props: FormProps) {
+      super(props);
       const formEntity: KeyedEntity = {};
       Object.entries(schemaEntity).map(([name, fieldComponent]) => {
         const FieldComponent = getReactEntityComponent(fieldComponent);
@@ -52,9 +54,12 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
           fieldComponent: FieldComponent
         }
       });
-      const SchemaComponent = createSchema(formEntity);
+      this.SchemaComponent = createSchema(formEntity);
+    }
+
+    public render() {
       return (
-        <SchemaComponent
+        <this.SchemaComponent
           ref={(el: any) => {
             this.fields = el && el.entities;
           }}
