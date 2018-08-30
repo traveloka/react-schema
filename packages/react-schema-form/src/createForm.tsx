@@ -24,17 +24,22 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
     public static type:string = K_FORM_TYPE;
 
     public fields: FieldByName = {};
+    private SchemaComponent: React.ComponentClass<any, any>;
 
-    public render() {
+    constructor(props: FormProps) {
+      super(props);
       const formEntity: KeyedEntity = {};
       Object.entries(schemaEntity).map(([name, fieldComponent]) => {
         const entityComponent: React.ComponentClass<any>  = getReactEntityComponent(fieldComponent);
         const entityProps: {[key: string]: any} = getEntityProps(fieldComponent);
         formEntity[name] = this.constructComponent(name, entityComponent, entityProps);
       });
-      const SchemaComponent = createSchema(formEntity);
+      this.SchemaComponent = createSchema(formEntity);
+    }
+
+    public render() {
       return (
-        <SchemaComponent
+        <this.SchemaComponent
           ref={(el: any) => {
             this.fields = el && el.entities;
           }}
