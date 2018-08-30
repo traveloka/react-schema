@@ -7,7 +7,7 @@
     "lint": "tslint --type-check -p tsconfig.json src/*.tsx && tslint --type-check -p tsconfig.json tests/*.tsx",
     "test": "jest",
     "test:coverage": "yarn test --coverage",
-    "test:ci": "yarn test:coverage -i --reporters jest-simple-dot-reporter jest-junit",
+    "test:ci": "yarn lint && yarn test:coverage -i --reporters jest-simple-dot-reporter jest-junit",
     "test:html": "nyc npm test && nyc report --reporter=html",
     "prebuild": "npm run clean",
     "clean": "rimraf lib/*",
