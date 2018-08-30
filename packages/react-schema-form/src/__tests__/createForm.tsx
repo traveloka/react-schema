@@ -67,6 +67,33 @@ describe('test createForm', () => {
       });
       expect(FieldEl).toBeTruthy();
     });
+
+    it('[props] should pass revalidateOnError and validateOnChange', () => {
+      class Input extends React.Component {
+        public render() {
+          return <input {...this.props} />
+        }
+      }
+      const Form = createForm({
+        email: {
+          component: Input,
+          defaultValue: 'test',
+          revalidateOnError: true,
+          validateOnChange: true,
+        },
+      });
+      const testRenderer = TestRenderer.create(
+        <Form />
+      );
+      const testInstance = testRenderer.root;
+      let FieldEl = null;
+      FieldEl = testInstance.findByProps({
+        fieldComponent: Input,
+        revalidateOnError: true,
+        validateOnChange: true,
+      });
+      expect(FieldEl).toBeTruthy();
+    });
   });
 
   it('[props] should trigger onChangeField for given field', () => {

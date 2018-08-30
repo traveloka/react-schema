@@ -161,4 +161,42 @@ describe('test Field Component', () => {
     expect(onChangeMock).toHaveBeenCalledTimes(1);
     expect(onChangeMock).toBeCalledWith('new-value');
   });
+
+  it('[props] revalidateOnError, should auto validate when error and value is changed', () => {
+    let field = null;
+    const rule = (value) => value !== 'key' ? 'invalid' : null;
+    const testRenderer = TestRenderer.create(
+      <Field
+        fieldComponent={FieldComponent}
+        revalidateOnError={true}
+        ref={el => field = el}
+        rules={rule}
+      />
+    );
+    expect(field.getError()).toBeFalsy();
+    field.setValue('new-value');
+    expect(field.getError()).toBeFalsy();
+    field.validate();
+    expect(field.getError()).toEqual('invalid');
+    field.setValue('key');
+    expect(field.getError()).toBeFalsy();
+  });
+
+  it('[props] validateOnChange, should auto validate when value is changed', () => {
+    let field = null;
+    const rule = (value) => value !== 'key' ? 'invalid' : null;
+    const testRenderer = TestRenderer.create(
+      <Field
+        fieldComponent={FieldComponent}
+        validateOnChange={true}
+        ref={el => field = el}
+        rules={rule}
+      />
+    );
+    expect(field.getError()).toBeFalsy();
+    field.setValue('new-value');
+    expect(field.getError()).toEqual('invalid');
+    field.setValue('key');
+    expect(field.getError()).toBeFalsy();
+  });
 });
