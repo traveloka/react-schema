@@ -128,11 +128,13 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
 
     private constructFieldComponent = (name: string, fieldComponent: React.ComponentClass<any, any>, props: {[key: string]: any}) => {
       const { value } = this.props;
-      const { defaultValue, rules, ...fieldProps } = props;
+      const { defaultValue, rules, revalidateOnError = true, validateOnChange = false, ...fieldProps } = props;
       const fieldValue = value ? value[name] : undefined;
       return {
         component: Field,
         onChange: (v:any) => this.props.onChangeField && this.props.onChangeField(name, v),
+        revalidateOnError,
+        validateOnChange,
         rules,
         defaultValue,
         name,
