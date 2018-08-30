@@ -323,32 +323,6 @@ describe('test createForm', () => {
     expect(form.getErrors()).toEqual(null);
   });
 
-  it('[props] value, should accept property value and distribute to fields', () => {
-    class Input extends React.Component {
-      public render() {
-        return <input {...this.props} />
-      }
-    }
-    const Form = createForm({
-      email: Input,
-      age: Input,
-    });
-    let form = null;
-    TestRenderer.create(
-      <Form
-        ref={el => form = el}
-        value={{
-          email: 'test@traveloka.com',
-          age: 17,
-        }}
-      />
-    );
-    expect(form.getValues()).toMatchObject({
-      email: 'test@traveloka.com',
-      age: 17,
-    });
-  });
-
   describe('test nested form', () => {
     it('[instance] should able handle setValues and getValues', () => {
       class Input extends React.Component {

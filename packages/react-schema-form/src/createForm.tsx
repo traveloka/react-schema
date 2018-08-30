@@ -14,7 +14,6 @@ type FieldByName = {
 
 type FormProps = {
   onChangeField: (name: string, value: any) => void,
-  value ?: any,
 }
 
 const K_FORM_TYPE = 'REACT_SCHEMA_FORM';
@@ -121,20 +120,15 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
     }
 
     private constructFormComponent = (name: string, formComponent: React.ComponentClass<any, any>, props: {[key: string]: any}) => {
-      const { value } = this.props;
-      const formValue = value ? value[name] : undefined;
       return {
         component: formComponent,
-        value: formValue,
         onChangeField: (fieldName: any, fieldValue: any) => this.props.onChangeField && this.props.onChangeField(`${name}.${fieldName}`, fieldValue),
         ...props,
       }
     }
 
     private constructFieldComponent = (name: string, fieldComponent: React.ComponentClass<any, any>, props: {[key: string]: any}) => {
-      const { value } = this.props;
       const { defaultValue, rules, revalidateOnError = true, validateOnChange = false, ...fieldProps } = props;
-      const fieldValue = value ? value[name] : undefined;
       return {
         component: Field,
         onChange: (v:any) => this.props.onChangeField && this.props.onChangeField(name, v),
@@ -143,7 +137,6 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
         rules,
         defaultValue,
         name,
-        value: fieldValue,
         fieldProps,
         fieldComponent
       };
