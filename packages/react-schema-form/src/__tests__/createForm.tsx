@@ -95,9 +95,7 @@ describe('test createForm', () => {
       );
       const testInstance = testRenderer.root;
       let FieldEl = null;
-      FieldEl = testInstance.findByProps({
-        fieldComponent: Input
-      });
+      FieldEl = testInstance.findByType(Input);
       expect(FieldEl).toBeTruthy();
       FieldEl = testInstance.findByProps({
         defaultValue: 'test'
@@ -125,7 +123,6 @@ describe('test createForm', () => {
       const testInstance = testRenderer.root;
       let FieldEl = null;
       FieldEl = testInstance.findByProps({
-        fieldComponent: Input,
         revalidateOnError: true,
         validateOnChange: true,
       });

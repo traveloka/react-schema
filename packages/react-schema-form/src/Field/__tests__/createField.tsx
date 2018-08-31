@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
-import { Field } from '../Field';
+import createField from '../createField';
 
 
 class FieldComponent extends React.Component {
@@ -11,16 +11,18 @@ class FieldComponent extends React.Component {
 
 describe('test Field Component', () => {
   it('should render fieldComponent props', () => {
+    const Field = createField(FieldComponent);
     const testRenderer = TestRenderer.create(
-      <Field fieldComponent={FieldComponent} />
+      <Field />
     );
     const testInstance = testRenderer.root;
     expect(testInstance.findByType(FieldComponent)).toBeTruthy();
   });
 
   it('should pass fieldProps to fieldComponents', () => {
+    const Field = createField(FieldComponent);
     const testRenderer = TestRenderer.create(
-      <Field fieldComponent={FieldComponent} fieldProps={{hello: 'World'}} />
+      <Field hello="World" />
     );
     const testInstance = testRenderer.root;
     expect(testInstance.findByType(FieldComponent).props.hello).toEqual('World');
@@ -28,9 +30,9 @@ describe('test Field Component', () => {
 
   it('should have expected value and error', () => {
     let field = null;
+    const Field = createField(FieldComponent);
     const testRenderer = TestRenderer.create(
       <Field
-        fieldComponent={FieldComponent}
         ref={el => field = el}
       />
     );
@@ -51,9 +53,9 @@ describe('test Field Component', () => {
 
   it('should have expected value from default value', () => {
     let field = null;
+    const Field = createField(FieldComponent);
     const testRenderer = TestRenderer.create(
       <Field
-        fieldComponent={FieldComponent}
         defaultValue='test'
         ref={el => field = el}
       />
@@ -68,9 +70,9 @@ describe('test Field Component', () => {
   it('should have expected error', () => {
     const rule = () => 'invalid';
     let field = null;
+    const Field = createField(FieldComponent);
     const testRenderer = TestRenderer.create(
       <Field
-        fieldComponent={FieldComponent}
         rules={rule}
         ref={el => field = el}
       />
@@ -86,9 +88,9 @@ describe('test Field Component', () => {
 
   it('should have no error with empty rule', () => {
     let field = null;
+    const Field = createField(FieldComponent);
     const testRenderer = TestRenderer.create(
       <Field
-        fieldComponent={FieldComponent}
         ref={el => field = el}
       />
     );
@@ -102,9 +104,9 @@ describe('test Field Component', () => {
   it('should have onChange callback', () => {
     let field = null;
     const onChangeMock = jest.fn();
+    const Field = createField(FieldComponent);
     const testRenderer = TestRenderer.create(
       <Field
-        fieldComponent={FieldComponent}
         ref={el => field = el}
         onChange={onChangeMock}
       />
@@ -118,9 +120,9 @@ describe('test Field Component', () => {
   it('should rules must be passed with value', () => {
     const rule = jest.fn();
     let field = null;
+    const Field = createField(FieldComponent);
     const testRenderer = TestRenderer.create(
       <Field
-        fieldComponent={FieldComponent}
         rules={rule}
         ref={el => field = el}
       />
@@ -133,9 +135,9 @@ describe('test Field Component', () => {
   it('should rules must be passed with value (array)', () => {
     const rule = jest.fn();
     let field = null;
+    const Field = createField(FieldComponent);
     const testRenderer = TestRenderer.create(
       <Field
-        fieldComponent={FieldComponent}
         rules={[rule]}
         ref={el => field = el}
       />
@@ -148,9 +150,9 @@ describe('test Field Component', () => {
   it('[props] revalidateOnError, should auto validate when error and value is changed', () => {
     let field = null;
     const rule = (value) => value !== 'key' ? 'invalid' : null;
+    const Field = createField(FieldComponent);
     const testRenderer = TestRenderer.create(
       <Field
-        fieldComponent={FieldComponent}
         revalidateOnError={true}
         ref={el => field = el}
         rules={rule}
@@ -168,9 +170,9 @@ describe('test Field Component', () => {
   it('[props] validateOnChange, should auto validate when value is changed', () => {
     let field = null;
     const rule = (value) => value !== 'key' ? 'invalid' : null;
+    const Field = createField(FieldComponent);
     const testRenderer = TestRenderer.create(
       <Field
-        fieldComponent={FieldComponent}
         validateOnChange={true}
         ref={el => field = el}
         rules={rule}

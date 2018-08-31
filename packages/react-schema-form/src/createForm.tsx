@@ -5,7 +5,7 @@ import {
   getReactEntityComponent,
   createSchema
 } from '@traveloka/react-schema';
-import { Field } from './Field';
+import { createField } from './Field';
 import { ValidationResultByName, FormInterface, FormFieldInterface, FormFieldValidationResult } from './types';
 
 type FieldByName = {
@@ -128,17 +128,11 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
     }
 
     private constructFieldComponent = (name: string, fieldComponent: React.ComponentClass<any, any>, props: {[key: string]: any}) => {
-      const { defaultValue, rules, revalidateOnError = true, validateOnChange = false, ...fieldProps } = props;
       return {
-        component: Field,
+        component: createField(fieldComponent),
         onChange: (v:any) => this.props.onChangeField && this.props.onChangeField(name, v),
-        revalidateOnError,
-        validateOnChange,
-        rules,
-        defaultValue,
         name,
-        fieldProps,
-        fieldComponent
+        ...props
       };
     }
 
