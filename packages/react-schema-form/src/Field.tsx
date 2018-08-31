@@ -15,7 +15,6 @@ interface FieldInterface {
 };
 
 type FieldProps = {
-  value?: any,
   revalidateOnError ?: boolean,
   validateOnChange ?: boolean,
   name?: string,
@@ -65,9 +64,6 @@ export class Field extends React.Component<FieldProps, FieldState> implements Fi
   }
 
   public getValue = () => {
-    if (this.props.value !== undefined) {
-      return this.props.value;
-    }
     return this.state.value;
   }
 
