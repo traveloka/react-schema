@@ -21,3 +21,9 @@ install:
 script:
   - yarn lint
   - yarn test
+
+deploy:
+  provider: script
+  script: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc && npm run publish:npm
+  on:
+    tags: true
