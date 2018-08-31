@@ -1,0 +1,23 @@
+language: node_js
+
+node_js:
+- "lts/*"
+
+notifications:
+  email: false
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - packages/react-schema/node_modules
+    - packages/react-schema-form/node_modules
+    - packages/validation/node_modules
+
+install:
+  - npm install
+  - yarn bootstrap
+
+script:
+  - yarn lint
+  - yarn test
