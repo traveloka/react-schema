@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/Jekiwijaya/react-schema/compare/v1.0.6...v2.0.0) (2018-08-31)
+
+
+### Bug Fixes
+
+* **form:** change onChange to onChangeField for Form prop ([be2662a](https://github.com/Jekiwijaya/react-schema/commit/be2662a))
+* bug when container rerender, form is reconstruct. ([044f9d4](https://github.com/Jekiwijaya/react-schema/commit/044f9d4))
+* remove value as props. ([37a1583](https://github.com/Jekiwijaya/react-schema/commit/37a1583))
+* test ([fc5e608](https://github.com/Jekiwijaya/react-schema/commit/fc5e608))
+
+
+### Features
+
+* **field:** instead pass fieldComponent and fieldProps, using hoc createField instead. ([4f38a63](https://github.com/Jekiwijaya/react-schema/commit/4f38a63))
+* **form:** able to handle nestedForm ([9fcc567](https://github.com/Jekiwijaya/react-schema/commit/9fcc567))
+* **form:** add option revalidateOnError and validateOnChange. ([988c6ba](https://github.com/Jekiwijaya/react-schema/commit/988c6ba))
+
+
+### BREAKING CHANGES
+
+* **form:** - form: setValue(name) to setValueField(name)
+- form: getValue(name) to getValueField(name)
+- form: setError(name) to setErrorField(name)
+- form: getError(name) to getErrorField(name)
+
+
+
+
+
 <a name="1.0.6"></a>
 ## [1.0.6](https://github.com/Jekiwijaya/react-schema/compare/v1.0.5...v1.0.6) (2018-08-23)
 
