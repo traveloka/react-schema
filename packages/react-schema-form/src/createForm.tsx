@@ -47,7 +47,10 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
     }
 
     public getValueField = (name : string): any => {
-      return this.fields[name].getValue();
+      if (this.fields[name]) {
+        return this.fields[name].getValue();
+      }
+      return null;
     }
     public getValue = ():{[name: string]: any} => {
       return Object.keys(schemaEntity).reduce((values, name) => ({
@@ -58,7 +61,10 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
     public getValues = () => this.getValue();
 
     public setValueField = (name: string, value: any): any => {
-      return this.fields[name].setValue(value);
+      if (this.fields[name]) {
+        return this.fields[name].setValue(value);
+      }
+      return null;
     }
     public setValue = (values: {[name: string]: any}): any => {
       Object.entries(values).map(([name, value]) => this.setValueField(name, value));
@@ -67,7 +73,10 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
     public setValues = (values: {[name: string]: any}): any => this.setValue(values);
 
     public getErrorField = (name: string): FormFieldValidationResult => {
-      return this.fields[name].getError();
+      if (this.fields[name]) {
+        return this.fields[name].getError();
+      }
+      return null;
     }
     public getError = (): ValidationResultByName => {
       const errors = Object.keys(schemaEntity).reduce((values, name) => ({
@@ -80,7 +89,10 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
     public getErrors = (): ValidationResultByName => this.getError();
 
     public setErrorField = (name: string, error: FormFieldValidationResult): FormFieldValidationResult => {
-      return this.fields[name].setError(error);
+      if (this.fields[name]) {
+        return this.fields[name].setError(error);
+      }
+      return null;
     }
     public setError = (errors: ValidationResultByName): any => {
       if (!errors) return null;
@@ -90,7 +102,10 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
     public setErrors = (errors:  ValidationResultByName): any => this.setError(errors);
 
     public validateField = (name: string): FormFieldValidationResult => {
-      return this.fields[name].validate();
+      if (this.fields[name]) {
+        return this.fields[name].validate();
+      }
+      return null;
     }
     public validate = (): ValidationResultByName => {
       const errors = Object.keys(schemaEntity).reduce((values, name) => ({
