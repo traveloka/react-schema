@@ -1,187 +1,22 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 import createField from '../createField';
+import FieldComponent from '../index';
 
-
-class FieldComponent extends React.Component {
+class Input extends React.Component {
   public render() {
-    return <input {...this.props} />
+    return null;
   }
 }
 
-describe('test Field Component', () => {
-  it('should render fieldComponent props', () => {
-    const Field = createField(FieldComponent);
+describe('test createField', () => {
+  it('should give component props', () => {
+    const Field = createField(Input);
     const testRenderer = TestRenderer.create(
       <Field />
     );
     const testInstance = testRenderer.root;
-    expect(testInstance.findByType(FieldComponent)).toBeTruthy();
-  });
-
-  it('should pass fieldProps to fieldComponents', () => {
-    const Field = createField(FieldComponent);
-    const testRenderer = TestRenderer.create(
-      <Field hello="World" />
-    );
-    const testInstance = testRenderer.root;
-    expect(testInstance.findByType(FieldComponent).props.hello).toEqual('World');
-  });
-
-  it('should have expected value and error', () => {
-    let field = null;
-    const Field = createField(FieldComponent);
-    const testRenderer = TestRenderer.create(
-      <Field
-        ref={el => field = el}
-      />
-    );
-    const testInstance = testRenderer.root;
-    const fieldComponent = testInstance.findByType(FieldComponent);
-    expect(fieldComponent.props.value).toBeFalsy();
-    fieldComponent.props.onChange('new value');
-    field.setError('new error');
-    expect(fieldComponent.props.value).toEqual('new value');
-    expect(fieldComponent.props.error).toEqual('new error');
-    field.reset();
-    expect(fieldComponent.props.value).toBeFalsy();
-    expect(fieldComponent.props.error).toBeFalsy();
-    expect(field.getValue()).toBeFalsy();
-    expect(field.getError()).toBeFalsy();
-  });
-
-
-  it('should have expected value from default value', () => {
-    let field = null;
-    const Field = createField(FieldComponent);
-    const testRenderer = TestRenderer.create(
-      <Field
-        defaultValue='test'
-        ref={el => field = el}
-      />
-    );
-    const testInstance = testRenderer.root;
-    const fieldComponent = testInstance.findByType(FieldComponent);
-    expect(fieldComponent.props.value).toEqual('test');
-    field.reset();
-    expect(fieldComponent.props.value).toBeFalsy();
-  });
-
-  it('should have expected error', () => {
-    const rule = () => 'invalid';
-    let field = null;
-    const Field = createField(FieldComponent);
-    const testRenderer = TestRenderer.create(
-      <Field
-        rules={rule}
-        ref={el => field = el}
-      />
-    );
-    const testInstance = testRenderer.root;
-    const fieldComponent = testInstance.findByType(FieldComponent);
-    expect(fieldComponent.props.error).toBeFalsy();
-    field.validate();
-    expect(fieldComponent.props.error).toEqual('invalid');
-    field.reset();
-    expect(fieldComponent.props.error).toBeFalsy();
-  });
-
-  it('should have no error with empty rule', () => {
-    let field = null;
-    const Field = createField(FieldComponent);
-    const testRenderer = TestRenderer.create(
-      <Field
-        ref={el => field = el}
-      />
-    );
-    const testInstance = testRenderer.root;
-    const fieldComponent = testInstance.findByType(FieldComponent);
-    expect(fieldComponent.props.error).toBeFalsy();
-    field.validate();
-    expect(fieldComponent.props.error).toBeFalsy();
-  });
-
-  it('should have onChange callback', () => {
-    let field = null;
-    const onChangeMock = jest.fn();
-    const Field = createField(FieldComponent);
-    const testRenderer = TestRenderer.create(
-      <Field
-        ref={el => field = el}
-        onChange={onChangeMock}
-      />
-    );
-    const testInstance = testRenderer.root;
-    const fieldComponent = testInstance.findByType(FieldComponent);
-    field.setValue('test');
-    expect(onChangeMock).toHaveBeenCalledTimes(1);
-  });
-
-  it('should rules must be passed with value', () => {
-    const rule = jest.fn();
-    let field = null;
-    const Field = createField(FieldComponent);
-    const testRenderer = TestRenderer.create(
-      <Field
-        rules={rule}
-        ref={el => field = el}
-      />
-    );
-    field.setValue('test');
-    field.validate();
-    expect(rule).toBeCalledWith('test');
-  });
-
-  it('should rules must be passed with value (array)', () => {
-    const rule = jest.fn();
-    let field = null;
-    const Field = createField(FieldComponent);
-    const testRenderer = TestRenderer.create(
-      <Field
-        rules={[rule]}
-        ref={el => field = el}
-      />
-    );
-    field.setValue('test');
-    field.validate();
-    expect(rule).toBeCalledWith('test');
-  });
-
-  it('[props] revalidateOnError, should auto validate when error and value is changed', () => {
-    let field = null;
-    const rule = (value) => value !== 'key' ? 'invalid' : null;
-    const Field = createField(FieldComponent);
-    const testRenderer = TestRenderer.create(
-      <Field
-        revalidateOnError={true}
-        ref={el => field = el}
-        rules={rule}
-      />
-    );
-    expect(field.getError()).toBeFalsy();
-    field.setValue('new-value');
-    expect(field.getError()).toBeFalsy();
-    field.validate();
-    expect(field.getError()).toEqual('invalid');
-    field.setValue('key');
-    expect(field.getError()).toBeFalsy();
-  });
-
-  it('[props] validateOnChange, should auto validate when value is changed', () => {
-    let field = null;
-    const rule = (value) => value !== 'key' ? 'invalid' : null;
-    const Field = createField(FieldComponent);
-    const testRenderer = TestRenderer.create(
-      <Field
-        validateOnChange={true}
-        ref={el => field = el}
-        rules={rule}
-      />
-    );
-    expect(field.getError()).toBeFalsy();
-    field.setValue('new-value');
-    expect(field.getError()).toEqual('invalid');
-    field.setValue('key');
-    expect(field.getError()).toBeFalsy();
+    const fieldComponentInstance = testInstance.findByType(FieldComponent);
+    expect(fieldComponentInstance.props.component).toEqual(Input);
   });
 });

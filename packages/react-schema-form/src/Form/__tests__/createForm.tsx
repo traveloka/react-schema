@@ -144,7 +144,7 @@ describe('test createForm', () => {
     const onChangeMock = jest.fn();
     TestRenderer.create(
       <Form
-        ref={el => form = el}
+        fieldRef={el => form = el}
         onChangeField={onChangeMock}
       />
     );
@@ -173,7 +173,7 @@ describe('test createForm', () => {
     });
     let form = null;
     TestRenderer.create(
-      <Form ref={el => form = el} />
+      <Form fieldRef={el => form = el} />
     );
     expect(form.getValueField('email')).toEqual('test');
     expect(form.getValueField('age')).toEqual(12);
@@ -207,7 +207,7 @@ describe('test createForm', () => {
     });
     let form = null;
     TestRenderer.create(
-      <Form ref={el => form = el} />
+      <Form fieldRef={el => form = el} />
     );
     const result = form.validate();
     const errors = form.getErrors();
@@ -241,7 +241,7 @@ describe('test createForm', () => {
     });
     let form = null;
     TestRenderer.create(
-      <Form ref={el => form = el} />
+      <Form fieldRef={el => form = el} />
     );
     const result = form.validate();
     expect(result).toBeFalsy();
@@ -260,7 +260,7 @@ describe('test createForm', () => {
     let form = null;
     TestRenderer.create(
       <Form
-        ref={el => form = el}
+        fieldRef={el => form = el}
       />
     );
     form.fields['email'].setValue('jacky.wijaya@traveloka.com');
@@ -293,7 +293,7 @@ describe('test createForm', () => {
     let form = null;
     TestRenderer.create(
       <Form
-        ref={el => form = el}
+        fieldRef={el => form = el}
       />
     );
     form.setErrors();
@@ -340,7 +340,7 @@ describe('test createForm', () => {
       let form = null;
       TestRenderer.create(
         <Form
-          ref={el => form = el}
+          fieldRef={el => form = el}
         />
       );
       form.setValues({
@@ -378,7 +378,7 @@ describe('test createForm', () => {
       let form = null;
       TestRenderer.create(
         <Form
-          ref={el => form = el}
+          fieldRef={el => form = el}
         />
       );
       form.setValues({
@@ -428,7 +428,7 @@ describe('test createForm', () => {
       let form = null;
       TestRenderer.create(
         <Form
-          ref={el => form = el}
+          fieldRef={el => form = el}
           onChangeField={onChangeMock}
         />
       );
@@ -462,7 +462,7 @@ describe('test createForm', () => {
       let form = null;
       TestRenderer.create(
         <Form
-          ref={el => form = el}
+          fieldRef={el => form = el}
           value={{
             profile: {
               name: 'Bob',

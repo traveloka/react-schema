@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "@traveloka/react-schema": "^2.0.0",
-    "@traveloka/validation": "^2.0.0"
+    "@traveloka/validation": "^2.0.0",
+    "create-react-context": "^0.2.3",
   },
   "peerDependencies": {
     "react": "*"

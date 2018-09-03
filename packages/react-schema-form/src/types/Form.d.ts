@@ -7,6 +7,10 @@ export type ValidationResultByName = {
   [name: string]: ValidationResult
 } | null;
 
+export type ValueByName = {
+  [name: string]: any
+} | null;
+
 export interface FormFieldInterface {
   getValue: () => any,
   setValue: (value: any) => any,
@@ -14,6 +18,10 @@ export interface FormFieldInterface {
   setError: (error: FormFieldValidationResult) => FormFieldValidationResult,
   validate: () => FormFieldValidationResult,
   reset: () => void,
+  initialize: (value: ValueByName | any) => ValueByName | any
+  getDefaultValue: () => ValueByName | any
+  hasError: () => boolean
+  isDirty: () => boolean
 }
 
 export interface FieldInterface extends FormFieldInterface {
@@ -23,15 +31,33 @@ export interface FieldInterface extends FormFieldInterface {
   setError: (error: ValidationResult) => ValidationResult,
   validate: () => ValidationResult,
   reset: () => void,
+  initialize: (value: any) => any
+  getDefaultValue: () => any
+  hasError: () => boolean
+  isDirty: () => boolean
+}
+
+
+export type FieldByName = {
+  [name: string]: FormFieldInterface,
 }
 
 export interface FormInterface extends FormFieldInterface {
+  fields: FieldByName,
+  notifyOnChange: (name: string, value: any) => void,
+
   getValue: () => any,
   setValue: (value: any) => any,
   getError: () => ValidationResultByName,
   setError: (error: FormFieldValidationResult) => ValidationResultByName,
   validate: () => ValidationResultByName,
   reset: () => void,
+  initialize: (value: ValueByName) => ValueByName
+  getDefaultValue: () => ValueByName
+  hasError: () => boolean
+  hasErrorField: (name: string) => boolean
+  isDirty: () => boolean
+  isDirtyField: (name: string) => boolean
 
   getValueField: (name: string) => any,
   setValueField: (name: string, value: any) => any,
