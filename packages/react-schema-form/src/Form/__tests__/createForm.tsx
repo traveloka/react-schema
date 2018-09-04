@@ -39,6 +39,32 @@ describe('test createForm', () => {
       expect(testInstance.findByType(Input)).toBeTruthy();
     });
 
+    it('should able pass isDirty and hasError by children as function', () => {
+      class Input extends React.Component {
+        public render() {
+          return <input {...this.props} />
+        }
+      }
+      const Form = createForm({
+        email: {
+          component: Input
+        }
+      });
+      const testRenderer = TestRenderer.create(
+        <Form>
+          {(state) => (
+            <Input {...state} />
+          )}
+        </Form>
+      );
+      const testInstance = testRenderer.root;
+      expect(testInstance.findByType(Input)).toBeTruthy();
+      expect(testInstance.findByProps({
+        isDirty: false,
+        hasError: false,
+      })).toBeTruthy();
+    });
+
     it('value should not gone', () => {
 
       class Input extends React.Component {

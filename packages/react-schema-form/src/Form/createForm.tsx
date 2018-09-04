@@ -41,19 +41,26 @@ export function createForm(schemaEntity: KeyedEntity): React.ComponentClass<any>
     }
 
     public render() {
-      const form = <this.SchemaComponent/>;
-
       return (
         <FormComponent
           fieldRef={this.props.fieldRef}
           name={this.props.name}
-          children={(...rest: any[]) => {
-            if (!this.props.children) return form;
-            if (typeof this.props.children === 'function') this.props.children(...rest);
-            return this.props.children;
-          }}
-        />
+        >
+          {(state: any) => this.handleRenderChildren(state)}
+        </FormComponent>
       )
+    }
+
+    private handleRenderChildren = (state: any[]) => {
+      const form = <this.SchemaComponent/>;
+      if (!this.props.children) return form;
+      if (typeof this.props.children === 'function') {
+        return this.props.children({
+          form,
+          ...state
+        });
+      }
+      return this.props.children;
     }
 
     private isFormClass(entityComponent: any): entityComponent is typeof FormComponent {

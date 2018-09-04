@@ -15,19 +15,28 @@ type FormState = {
 }
 
 type FormProps = {
-  children: any
+  children?: any
 }
 
 const K_FORM_TYPE = 'REACT_SCHEMA_FORM';
 
-class FormComponent extends React.PureComponent<FormProps, FormState> {
+export class FormComponent extends React.PureComponent<FormProps, FormState> {
   public static type:string = K_FORM_TYPE;
   public fields: FieldByName = {};
+
+
+  constructor(props: any) {
+    super(props);
+    this.state  = {
+      isDirty: false,
+      hasError: false,
+    };
+  }
 
   public getContextType = () => {
     return {
       fields: this.fields,
-      notifyOnChange: () => this.handleFieldOnChange
+      notifyOnChange: this.handleFieldOnChange
     }
   }
 

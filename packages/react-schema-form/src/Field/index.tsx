@@ -108,8 +108,9 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
 
   public initialize = (value: any) => {
     this.setState({
-      value: value,
       defaultValue: value,
+    }, () => {
+      this.setValue(value);
     });
   }
 
@@ -119,11 +120,11 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
 
   public isDirty = () => {
     const { value, defaultValue } = this.state;
-    return value === defaultValue;
+    return value !== defaultValue;
   }
 
   public hasError = () => {
-    return !this.getError();
+    return !!this.getError();
   }
 }
 
