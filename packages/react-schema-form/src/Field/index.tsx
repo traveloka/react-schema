@@ -87,10 +87,11 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
   public setError = (error: ValidationResult) => {
     this.setState({
       error
+    }, () => {
+      if (this.props.onError) {
+        this.props.onError(error);
+      }
     });
-    if (this.props.onError) {
-      this.props.onError(error);
-    }
     return error;
   }
 

@@ -68,4 +68,38 @@ describe('test Form', () => {
       expect(buttonEl.props.hasError).toEqual(false);
     });
   });
+
+  it('hasError should true when field is error', () => {
+    let form = null;
+    class Button extends React.Component {
+      public render() {
+        return null;
+      }
+    }
+    const rule = (value) => {
+      return value !== 'key' ? 'invalid' : null;
+    }
+    const testRenderer = TestRenderer.create(
+      <FormComponent fieldRef={(el) => form = el}>
+        {(state) => (
+          <>
+            <Field name="email" rules={rule} component={Input}/>
+            <Button {...state}/>
+          </>
+        )}
+      </FormComponent>
+    );
+    const testInstance = testRenderer.root;
+    const inputEl = testInstance.findByType(Input);
+    const buttonEl = testInstance.findByType(Button);
+    inputEl.props.onChange('new value');
+    form.validate();
+    expect(buttonEl.props.isDirty).toEqual(true);
+    expect(buttonEl.props.hasError).toEqual(true);
+    form.setValue({
+      email: 'key',
+    });
+    expect(buttonEl.props.isDirty).toEqual(true);
+    expect(buttonEl.props.hasError).toEqual(false);
+  });
 });
