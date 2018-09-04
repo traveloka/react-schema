@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/Jekiwijaya/react-schema/compare/v2.0.1...v3.0.0) (2018-09-04)
+
+
+### Bug Fixes
+
+* isDirty and hasError ([de8e0b8](https://github.com/Jekiwijaya/react-schema/commit/de8e0b8))
+
+
+### Features
+
+* **form:** add form and field components ([1826589](https://github.com/Jekiwijaya/react-schema/commit/1826589))
+
+
+### BREAKING CHANGES
+
+* **form:** ref to fieldRef
+
+
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/Jekiwijaya/react-schema/compare/v2.0.0...v2.0.1) (2018-09-03)
 

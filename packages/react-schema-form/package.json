@@ -1,6 +1,6 @@
 {
   "name": "@traveloka/react-schema-form",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
@@ -16,8 +16,8 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "@traveloka/react-schema": "^2.0.0",
-    "@traveloka/validation": "^2.0.0",
+    "@traveloka/react-schema": "^3.0.0",
+    "@traveloka/validation": "^3.0.0",
     "create-react-context": "^0.2.3"
   },
   "peerDependencies": {
