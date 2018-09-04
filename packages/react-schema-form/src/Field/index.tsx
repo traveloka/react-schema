@@ -14,6 +14,7 @@ type FieldProps = {
   name?: string,
   label?: string,
   onChange?: (value:any) => void,
+  onError?: (error: ValidationResult) => any,
   defaultValue?: any,
   rules?: Rule,
   [key: string]: any,
@@ -87,6 +88,9 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
     this.setState({
       error
     });
+    if (this.props.onError) {
+      this.props.onError(error);
+    }
     return error;
   }
 

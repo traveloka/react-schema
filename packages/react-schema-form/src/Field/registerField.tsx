@@ -18,6 +18,7 @@ export default function registerField(WrapperComponent: React.ComponentClass<any
               {...this.props}
               ref={(el: any) => el && this.handleRegisterField(el, form)}
               onChange={(value: any) => this.handleSubscribeOnChange(value, form)}
+              onError={(error: any) => this.handleSubscribeOnChange(error, form)}
             />
           )}
         </FormContext.Consumer>
@@ -44,6 +45,16 @@ export default function registerField(WrapperComponent: React.ComponentClass<any
       }
       if (this.props.onChange) {
         this.props.onChange(value);
+      }
+    }
+
+    public handleSubscribeOnError = (error: any, form ?: FormInterface) => {
+      const { name } = this.props;
+      if (form && name) {
+        form.notifyOnError(name, error);
+      }
+      if (this.props.onChange) {
+        this.props.onError(error);
       }
     }
   }

@@ -40,17 +40,32 @@ describe('test Form', () => {
   describe('test notifyOnChange', () => {
     it('should call notifyOnChange when field is setValue', () => {
       let form = null;
+      class Button extends React.Component {
+        public render() {
+          return null;
+        }
+      }
       const testRenderer = TestRenderer.create(
         <FormComponent fieldRef={(el) => form = el}>
           {(state) => (
-            <Field name="email" component={Input} {...state} />
+            <>
+              <Field name="email" component={Input}/>
+              <Button {...state}/>
+            </>
           )}
         </FormComponent>
       );
       const testInstance = testRenderer.root;
       const inputEl = testInstance.findByType(Input);
+      const buttonEl = testInstance.findByType(Button);
       inputEl.props.onChange('new value');
-      expect(form.state.isDirty).toEqual(true);
+      expect(buttonEl.props.isDirty).toEqual(true);
+      expect(buttonEl.props.hasError).toEqual(false);
+      form.setValue({
+        email: undefined,
+      });
+      expect(buttonEl.props.isDirty).toEqual(false);
+      expect(buttonEl.props.hasError).toEqual(false);
     });
   });
 });

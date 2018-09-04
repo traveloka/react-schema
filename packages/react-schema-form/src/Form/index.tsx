@@ -36,7 +36,8 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
   public getContextType = () => {
     return {
       fields: this.fields,
-      notifyOnChange: this.handleFieldOnChange
+      notifyOnChange: this.handleFieldOnChange,
+      notifyOnError: this.handleFieldOnError
     }
   }
 
@@ -173,9 +174,14 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
 
   private handleFieldOnChange = () => {
     const isDirty = this.isDirty();
-    const hasError = this.hasError();
     this.setState({
       isDirty,
+    });
+  }
+
+  private handleFieldOnError = () => {
+    const hasError = this.hasError();
+    this.setState({
       hasError,
     });
   }

@@ -45,6 +45,7 @@ export type FieldByName = {
 export interface FormInterface extends FormFieldInterface {
   fields: FieldByName,
   notifyOnChange: (name: string, value: any) => void,
+  notifyOnError: (name: string, error: ValidationResult) => void,
 
   getValue: () => any,
   setValue: (value: any) => any,
