@@ -74,10 +74,10 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
       if (validateOnChange || (revalidateOnError && this.getError())) {
         this.validate();
       }
+      if (this.props.onChange) {
+        this.props.onChange(value);
+      }
     });
-    if (this.props.onChange) {
-      this.props.onChange(value);
-    }
   }
 
   public getError = () => {
