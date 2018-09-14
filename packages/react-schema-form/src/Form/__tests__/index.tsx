@@ -102,4 +102,35 @@ describe('test Form', () => {
     expect(buttonEl.props.isDirty).toEqual(true);
     expect(buttonEl.props.hasError).toEqual(false);
   });
+
+  it('[children function] should rerender and give new value', () => {
+    let form = null;
+    class InputField extends React.Component<any> {
+      public render() {
+        return null;
+      }
+    }
+    class TComp extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    const testRenderer = TestRenderer.create(
+      <FormComponent fieldRef={(el) => form = el}>
+        {(state) => (
+          <>
+            <Field name="email" component={InputField}/>
+            <TComp title={state.values.email}/>
+          </>
+        )}
+      </FormComponent>
+    );
+    const testInstance = testRenderer.root;
+    const inputEl = testInstance.findByType(InputField).instance;
+    const textEl = testInstance.findByType(TComp).instance;
+    inputEl.props.onChange('new value');
+    expect(textEl.props.title).toEqual('new value');
+    inputEl.props.onChange('new');
+    expect(textEl.props.title).toEqual('new');
+  });
 });

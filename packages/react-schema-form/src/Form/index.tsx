@@ -12,6 +12,7 @@ type FieldByName = {
 type FormState = {
   isDirty: boolean,
   hasError: boolean,
+  values: ValueByName,
 }
 
 type FormProps = {
@@ -30,6 +31,7 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
     this.state  = {
       isDirty: false,
       hasError: false,
+      values: {},
     };
   }
 
@@ -172,11 +174,15 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
     return Object.keys(this.fields).reduce((hasError, name) => hasError || this.hasErrorField(name), false);
   }
 
-  private handleFieldOnChange = () => {
+  private handleFieldOnChange = (name: string, value: any) => {
     const isDirty = this.isDirty();
-    this.setState({
+    this.setState(({values}) => ({
       isDirty,
-    });
+      values: {
+        ...values,
+        [name]: value
+      }
+    }));
   }
 
   private handleFieldOnError = () => {
