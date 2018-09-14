@@ -11,6 +11,7 @@ type FieldProps = {
   component: React.ComponentClass<any, any>,
   revalidateOnError ?: boolean,
   validateOnChange ?: boolean,
+  normalize: (value: any) => any,
   name?: string,
   label?: string,
   onChange?: (value:any) => void,
@@ -30,12 +31,13 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
   public static defaultProps = {
     revalidateOnError: true,
     validateOnChange: false,
+    normalize: (value: any) => value,
   }
 
   constructor(props: any) {
     super(props);
     this.state = {
-      value: props.defaultValue,
+      value: props.normalize(props.defaultValue),
       defaultValue: props.defaultValue,
       error: null,
     }
@@ -55,18 +57,19 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
     );
   }
 
-  public validate = () => {
+  public validate = (): ValidationResult => {
     const { rules = [] } = this.props;
     const error = validate(rules)(this.getValue());
     this.setError(error);
     return error;
   }
 
-  public getValue = () => {
-    return this.state.value;
+  public getValue = (): any => {
+    return this.props.normalize(this.state.value);
   }
 
-  public setValue = (value: any) => {
+  public setValue = (dirtyValue: any): void => {
+    const value = this.props.normalize(dirtyValue);
     this.setState({
       value
     }, () => {

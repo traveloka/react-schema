@@ -184,4 +184,21 @@ describe('test Field Component', () => {
     field.setValue('key');
     expect(field.getError()).toBeFalsy();
   });
+
+  it('[props] normalize', () => {
+    let field = null;
+    const testRenderer = TestRenderer.create(
+      <Field
+        component={FieldComponent}
+        fieldRef={el => field = el}
+        normalize={(value = '') => (value.replace(/[^\d]/g,'').match(/.{1,3}/g) || []).join('-')}
+      />
+    );
+    const testInstance = testRenderer.root;
+    const fieldEl = testInstance.findByType(FieldComponent);
+    fieldEl.props.onChange('12345');
+    expect(fieldEl.props.value).toEqual('123-45');
+    field.setValue('123-45678');
+    expect(fieldEl.props.value).toEqual('123-456-78');
+  });
 });
