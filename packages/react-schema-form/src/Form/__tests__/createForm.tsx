@@ -424,12 +424,12 @@ describe('test createForm', () => {
       form.reset();
       expect(form.getValues()).toMatchObject({
         profile: {
-          name: null,
-          age: null,
+          name: undefined,
+          age: undefined,
         },
         additional: {
-          gender: null,
-          city: null
+          gender: undefined,
+          city: undefined
         }
       });
     });

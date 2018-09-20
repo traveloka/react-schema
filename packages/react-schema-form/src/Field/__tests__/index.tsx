@@ -56,15 +56,16 @@ describe('test Field Component', () => {
     const testRenderer = TestRenderer.create(
       <Field
         component={FieldComponent}
-        defaultValue='test'
+        defaultValue='default value'
         fieldRef={el => field = el}
       />
     );
     const testInstance = testRenderer.root;
     const fieldComponent = testInstance.findByType(FieldComponent);
+    fieldComponent.props.onChange('test')
     expect(fieldComponent.props.value).toEqual('test');
     field.reset();
-    expect(fieldComponent.props.value).toBeFalsy();
+    expect(fieldComponent.props.value).toEqual('default value');
   });
 
   it('should have expected error', () => {
