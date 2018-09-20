@@ -99,7 +99,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
   }
 
   public reset = () => {
-    this.setValue(null);
+    this.setValue(this.state.defaultValue);
     this.setError(null);
   }
 
