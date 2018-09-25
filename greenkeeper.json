@@ -1,0 +1,12 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "package.json",
+        "packages/react-schema-form/package.json",
+        "packages/react-schema/package.json",
+        "packages/validation/package.json"
+      ]
+    }
+  }
+}
