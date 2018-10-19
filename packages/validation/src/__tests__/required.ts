@@ -26,6 +26,16 @@ describe('test required', () => {
     expect(result).toBeFalsy();
   });
 
+  it("should return falsy because value 123", () => {
+    const result = required(123);
+    expect(result).toBeFalsy();
+  });
+
+  it("should return falsy because value true", () => {
+    const result = required(true);
+    expect(result).toBeFalsy();
+  });
+
   it("should return truthy because value is {}", () => {
     const result = required({});
     expect(result).toBeTruthy();

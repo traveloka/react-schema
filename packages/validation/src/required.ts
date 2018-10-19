@@ -5,7 +5,7 @@ export const required: Validation = (value: any, errorMessage?: string): Validat
     value === null ||
     value === undefined ||
     value === '' ||
-    (Object.keys(value).length === 0 && value.constructor === Object) ||
+    (value.constructor === Object && Object.keys(value).length === 0) ||
     (Array.isArray(value) && !value.length)
   )
     return errorMessage || 'Required';
