@@ -50,4 +50,9 @@ describe('test required', () => {
     const result = required(null, 'custom error message');
     expect(result).toEqual('custom error message');
   });
+
+  it("should not return error message because value is a date", () => {
+    const result = required(new Date());
+    expect(result).toBeFalsy();
+  });
 });
