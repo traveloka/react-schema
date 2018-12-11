@@ -38,6 +38,7 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
   public getContextType = () => {
     return {
       fields: this.fields,
+      removeField: this.removeField,
       notifyOnChange: this.handleFieldOnChange,
       notifyOnError: this.handleFieldOnError
     }
@@ -172,6 +173,12 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
   }
   public hasError = (): boolean => {
     return Object.keys(this.fields).reduce((hasError, name) => hasError || this.hasErrorField(name), false);
+  }
+
+  public removeField = (name: string): any => {
+    if (this.fields[name]) {
+      delete this.fields[name];
+    }
   }
 
   private handleFieldOnChange = (name: string, value: any) => {

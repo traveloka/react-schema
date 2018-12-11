@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { FormInterface, FieldInterface } from '../types';
-import FormContext from '../Form/FormContext';
+import { withForm } from '../Form/FormContext';
 
 type FormFieldProps = {
   name?: string,
@@ -10,18 +10,23 @@ type FormFieldProps = {
 
 export default function registerField(WrapperComponent: React.ComponentClass<any, any>): React.ComponentClass<any, any> {
   const Wrapper = class extends React.Component<FormFieldProps, any> {
+
+    public componentWillUnmount() {
+      const { form, name } = this.props;
+      if (form) {
+        form.removeField(name);
+      }
+    }
+
     public render() {
+      const { form } = this.props;
       return (
-        <FormContext.Consumer>
-          {(form?: FormInterface) => (
-            <WrapperComponent
-              {...this.props}
-              ref={(el: any) => el && this.handleRegisterField(el, form)}
-              onChange={(value: any) => this.handleSubscribeOnChange(value, form)}
-              onError={(error: any) => this.handleSubscribeOnError(error, form)}
-            />
-          )}
-        </FormContext.Consumer>
+        <WrapperComponent
+          {...this.props}
+          ref={(el: any) => el && this.handleRegisterField(el, form)}
+          onChange={(value: any) => this.handleSubscribeOnChange(value, form)}
+          onError={(error: any) => this.handleSubscribeOnError(error, form)}
+        />
       );
     }
 
@@ -58,5 +63,5 @@ export default function registerField(WrapperComponent: React.ComponentClass<any
       }
     }
   }
-  return Wrapper;
+  return withForm(Wrapper);
 }
