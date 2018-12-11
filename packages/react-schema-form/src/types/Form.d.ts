@@ -62,6 +62,7 @@ export interface FormInterface extends FormFieldInterface {
 
   getValueField: (name: string) => any,
   setValueField: (name: string, value: any) => any,
+  removeField: (name: string) => any,
   getErrorField: (name: string) => FormFieldValidationResult,
   setErrorField: (name: string, error: FormFieldValidationResult) => FormFieldValidationResult,
   validateField: (name: string) => FormFieldValidationResult,
