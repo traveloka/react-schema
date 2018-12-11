@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.1.4"></a>
+## [3.1.4](https://github.com/Jekiwijaya/react-schema/compare/v3.1.3...v3.1.4) (2018-12-11)
+
+
+### Bug Fixes
+
+* **Field:** 👋 remove field value when componentWillUnmount ([ec9cb0a](https://github.com/Jekiwijaya/react-schema/commit/ec9cb0a))
+
+
+
+
+
 <a name="3.1.3"></a>
 ## [3.1.3](https://github.com/Jekiwijaya/react-schema/compare/v3.1.2...v3.1.3) (2018-10-19)
 
