@@ -133,4 +133,67 @@ describe('test Form', () => {
     inputEl.props.onChange('new');
     expect(textEl.props.title).toEqual('new');
   });
+
+  it('[nested form] able to have nested forms', () => {
+    let form = null;
+    class EmailField extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    class FirstField extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    class LastField extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    class TComp extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    const testRenderer = TestRenderer.create(
+      <FormComponent fieldRef={(el) => form = el}>
+        {(state) => (
+          <>
+            <Field name="email" component={EmailField}/>
+            <FormComponent name="profile">
+              <>
+                <Field name="first" component={FirstField}/>
+                <Field name="last" component={LastField}/>
+              </>
+            </FormComponent>
+            <TComp {...state}/>
+          </>
+        )}
+      </FormComponent>
+    );
+    const testInstance = testRenderer.root;
+    const emailEl = testInstance.findByType(EmailField).instance;
+    const firstEl = testInstance.findByType(FirstField).instance;
+    const lastEl = testInstance.findByType(LastField).instance;
+    emailEl.props.onChange('jacky.wijaya@traveloka.com');
+    firstEl.props.onChange('jacky');
+    lastEl.props.onChange('wijaya');
+
+    expect(form.getValue()).toMatchObject({
+      email: 'jacky.wijaya@traveloka.com',
+      profile: {
+        first: 'jacky',
+        last: 'wijaya'
+      }
+    });
+    const dataEl = testInstance.findByType(TComp).instance;
+    expect(dataEl.props.values).toMatchObject({
+      email: 'jacky.wijaya@traveloka.com',
+      profile: {
+        first: 'jacky',
+        last: 'wijaya'
+      }
+    });
+  });
 });

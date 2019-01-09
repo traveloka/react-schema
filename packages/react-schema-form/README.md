@@ -103,6 +103,13 @@ This can be any component class that you have written or have imported from a th
 import React, { Component } from 'react'
 
 class MyCustomInput extends Component {
+  static propTypes = {
+    value: PropTypes.any,
+    onChange: PropTypes.func,
+    isDirty: PropTypes.bool,
+    error: PropTypes.string,
+  }
+
   render() {
     const { value, onChange } = this.props
     return (
@@ -191,6 +198,30 @@ import MyErrorableInput from './MyErrorableInput';
 | `getErrorField(fieldName: string) => ValidationResult`                          | return field error message                                     |
 | `setErrorField(fieldName: string, error: ValidationResult) => ValidationResult` | set field error message                                        |
 | `validateField(fieldName: string) => ValidationResult`                          | validate specify field                                         |
+
+## Nested Forms
+You could also build a nested form like this
+```jsx
+<Form fieldRef={form => this.form = form}>
+  <div>
+    <Field name="email" component={InputField} />
+    <Form name="profile">
+      <Field name="first" component={InputField} />
+      <Field name="last" component={InputField} />
+    </Form>
+  </div>
+</Form>
+
+// when you get value
+this.form.getValue()
+{
+  email: ...,
+  profile: {
+    first: ...,
+    last: ...
+  }
+}
+```
 
 ## Playground
 - Example 1

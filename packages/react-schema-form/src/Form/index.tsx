@@ -16,6 +16,7 @@ type FormState = {
 }
 
 type FormProps = {
+  onChange?: (value: any) => any,
   children?: any
 }
 
@@ -183,13 +184,14 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
 
   private handleFieldOnChange = (name: string, value: any) => {
     const isDirty = this.isDirty();
-    this.setState(({values}) => ({
-      isDirty,
-      values: {
+    this.setState(({values}) => {
+      const newValues = {
         ...values,
         [name]: value
-      }
-    }));
+      };
+      if (this.props.onChange) this.props.onChange(newValues);
+      this.setState({ isDirty, values: newValues });
+    });
   }
 
   private handleFieldOnError = () => {
