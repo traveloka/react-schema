@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.1.5"></a>
+## [3.1.5](https://github.com/Jekiwijaya/react-schema/compare/v3.1.4...v3.1.5) (2019-01-09)
+
+
+### Bug Fixes
+
+* **Form:** 🔧 fixing nested form values children function. ([6d9a03f](https://github.com/Jekiwijaya/react-schema/commit/6d9a03f))
+
+
+
+
+
 <a name="3.1.4"></a>
 ## [3.1.4](https://github.com/Jekiwijaya/react-schema/compare/v3.1.3...v3.1.4) (2018-12-11)
 
