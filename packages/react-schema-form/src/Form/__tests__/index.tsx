@@ -134,6 +134,35 @@ describe('test Form', () => {
     expect(textEl.props.title).toEqual('new');
   });
 
+
+
+  it('[children function] defaultValue should be passed to values', () => {
+    let form = null;
+    class InputField extends React.Component<any> {
+      public render() {
+        return null;
+      }
+    }
+    class TComp extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    const testRenderer = TestRenderer.create(
+      <FormComponent fieldRef={(el) => form = el}>
+        {(state) => (
+          <>
+            <Field name="email" component={InputField} defaultValue="traveloka"/>
+            <TComp title={state.values.email}/>
+          </>
+        )}
+      </FormComponent>
+    );
+    const testInstance = testRenderer.root;
+    const textEl = testInstance.findByType(TComp).instance;
+    expect(textEl.props.title).toEqual('traveloka');
+  });
+
   it('[nested form] able to have nested forms', () => {
     let form = null;
     class EmailField extends React.Component<{ title: string }> {

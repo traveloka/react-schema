@@ -41,6 +41,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
       defaultValue: props.defaultValue,
       error: null,
     }
+    if (props.onChange && this.state.value) props.onChange(this.state.value);
   }
 
   public render() {
