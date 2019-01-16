@@ -152,15 +152,19 @@ describe('test Form', () => {
       <FormComponent fieldRef={(el) => form = el}>
         {(state) => (
           <>
-            <Field name="email" component={InputField} defaultValue="traveloka"/>
-            <TComp title={state.values.email}/>
+            <Field name="firstName" component={InputField} defaultValue="Jacky"/>
+            <Field name="lastName" component={InputField} defaultValue="Wijaya"/>
+            <TComp title={state.values}/>
           </>
         )}
       </FormComponent>
     );
     const testInstance = testRenderer.root;
     const textEl = testInstance.findByType(TComp).instance;
-    expect(textEl.props.title).toEqual('traveloka');
+    expect(textEl.props.title).toMatchObject({
+      firstName: 'Jacky',
+      lastName: 'Wijaya'
+    });
   });
 
   it('[nested form] able to have nested forms', () => {
