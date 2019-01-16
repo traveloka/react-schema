@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.1.7"></a>
+## [3.1.7](https://github.com/Jekiwijaya/react-schema/compare/v3.1.6...v3.1.7) (2019-01-16)
+
+
+### Bug Fixes
+
+* 🔧 fixing form setState values ([e38672e](https://github.com/Jekiwijaya/react-schema/commit/e38672e))
+
+
+
+
+
 <a name="3.1.6"></a>
 ## [3.1.6](https://github.com/Jekiwijaya/react-schema/compare/v3.1.5...v3.1.6) (2019-01-16)
 
