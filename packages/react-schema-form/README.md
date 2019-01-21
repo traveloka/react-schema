@@ -33,6 +33,7 @@ export default function InputField({ onChange, value, ...rest }) {
 // LoginForm.js
 
 import React from 'react';
+import { Form, Field } from '@traveloka/react-schema-form';  // ES6
 import InputField from './InputField';
 
 export default class LoginForm extends React.Component {
