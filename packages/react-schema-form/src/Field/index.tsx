@@ -50,10 +50,10 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
     return (
       <WrapperComponent
         label={label}
-        {...rest}
-        isDirty={this.isDirty()}
         value={this.getValue()}
+        isDirty={this.isDirty()}
         error={this.getError()}
+        {...rest}
         onChange={this.handleOnChange}
       />
     );

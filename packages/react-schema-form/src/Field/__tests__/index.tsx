@@ -202,4 +202,19 @@ describe('test Field Component', () => {
     field.setValue('123-45678');
     expect(fieldEl.props.value).toEqual('123-456-78');
   });
+
+
+  it('[props] value', () => {
+    let field = null;
+    const testRenderer = TestRenderer.create(
+      <Field
+        component={FieldComponent}
+        fieldRef={el => field = el}
+        value="asd"
+      />
+    );
+    const testInstance = testRenderer.root;
+    const fieldEl = testInstance.findByType(FieldComponent);
+    expect(fieldEl.props.value).toEqual('asd');
+  });
 });
