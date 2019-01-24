@@ -216,5 +216,6 @@ describe('test Field Component', () => {
     const testInstance = testRenderer.root;
     const fieldEl = testInstance.findByType(FieldComponent);
     expect(fieldEl.props.value).toEqual('asd');
+    expect(field.getValue()).toEqual('asd');
   });
 });

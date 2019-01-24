@@ -37,7 +37,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
   constructor(props: any) {
     super(props);
     this.state = {
-      value: props.normalize(props.defaultValue),
+      value: props.normalize(props.value || props.defaultValue),
       defaultValue: props.defaultValue,
       error: null,
     }
@@ -67,7 +67,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState> implements 
   }
 
   public getValue = (): any => {
-    return this.props.normalize(this.state.value);
+    return this.props.normalize(this.props.value || this.state.value);
   }
 
   public setValue = (dirtyValue: any): void => {
