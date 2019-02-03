@@ -189,8 +189,9 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
         ...values,
         [name]: value
       };
-      if (this.props.onChange) this.props.onChange(newValues);
       return { isDirty, values: newValues };
+    }, () => {
+      if (this.props.onChange) this.props.onChange(this.state.values);
     });
   }
 
