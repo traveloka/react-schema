@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.1.11"></a>
+## [3.1.11](https://github.com/Jekiwijaya/react-schema/compare/v3.1.10...v3.1.11) (2019-02-06)
+
+
+### Bug Fixes
+
+* **Form:** fixing update local values when unmount field ([f551b4e](https://github.com/Jekiwijaya/react-schema/commit/f551b4e))
+
+
+
+
+
 <a name="3.1.10"></a>
 ## [3.1.10](https://github.com/Jekiwijaya/react-schema/compare/v3.1.9...v3.1.10) (2019-02-06)
 
