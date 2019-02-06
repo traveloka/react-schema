@@ -178,6 +178,15 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
 
   public removeField = (name: string): any => {
     if (this.fields[name]) {
+      this.setState(({ values: oldValues }) => {
+        if (oldValues) {
+          const { [name]: value, ...newValues } = oldValues;
+          return {
+            values: newValues,
+          }
+        }
+        return null;
+      });
       delete this.fields[name];
     }
   }

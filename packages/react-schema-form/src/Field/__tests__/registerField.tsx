@@ -33,5 +33,6 @@ describe('test registerField', () => {
     expect(form.getValue().lastName).toEqual('Wijaya');
     pageInstance.setState({ isShowLastNameField: false });
     expect(form.getValue().lastName).toBeFalsy();
+    expect(form.state.values.lastName).toBeFalsy();
   });
 });
