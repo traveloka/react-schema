@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.1.10"></a>
+## [3.1.10](https://github.com/Jekiwijaya/react-schema/compare/v3.1.9...v3.1.10) (2019-02-06)
+
+
+### Bug Fixes
+
+* **Field:** trigger onChange even value is null ([a550b5f](https://github.com/Jekiwijaya/react-schema/commit/a550b5f))
+* **Form:** call onChange in callback setState ([bc74718](https://github.com/Jekiwijaya/react-schema/commit/bc74718))
+
+
+
+
+
 <a name="3.1.9"></a>
 ## [3.1.9](https://github.com/Jekiwijaya/react-schema/compare/v3.1.8...v3.1.9) (2019-01-24)
 
