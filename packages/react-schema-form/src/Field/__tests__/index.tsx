@@ -114,6 +114,7 @@ describe('test Field Component', () => {
     );
     const testInstance = testRenderer.root;
     const fieldComponent = testInstance.findByType(FieldComponent);
+    onChangeMock.mockClear();
     field.setValue('test');
     expect(onChangeMock).toHaveBeenCalledTimes(1);
   });
@@ -217,5 +218,19 @@ describe('test Field Component', () => {
     const fieldEl = testInstance.findByType(FieldComponent);
     expect(fieldEl.props.value).toEqual('asd');
     expect(field.getValue()).toEqual('asd');
+  });
+
+  it('[props] onChange should be trigger even value is null', () => {
+    let field = null;
+    const onChangeMock = jest.fn();
+    const testRenderer = TestRenderer.create(
+      <Field
+        component={FieldComponent}
+        fieldRef={el => field = el}
+        onChange={onChangeMock}
+      />
+    );
+    const testInstance = testRenderer.root;
+    expect(onChangeMock).toHaveBeenCalledTimes(1);
   });
 });

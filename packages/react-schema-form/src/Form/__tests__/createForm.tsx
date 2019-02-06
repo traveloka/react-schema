@@ -174,6 +174,7 @@ describe('test createForm', () => {
         onChangeField={onChangeMock}
       />
     );
+    onChangeMock.mockClear();
     form.fields['email'].setValue('jacky.wijaya@traveloka.com');
     form.fields['age'].setValue(17);
     expect(onChangeMock).toHaveBeenCalledTimes(2);
@@ -458,6 +459,7 @@ describe('test createForm', () => {
           onChangeField={onChangeMock}
         />
       );
+      onChangeMock.mockClear();
       form.setValues({
         profile: {
           name: 'Bob',
