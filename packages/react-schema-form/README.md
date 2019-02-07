@@ -71,7 +71,7 @@ import { Field } from '@traveloka/react-schema-form';  // ES6
 
 #### Props
 | Property          | Type                 | Default Value    | Description                              |
-|-------------------|----------------------|------------------|------------------------------------------|
+| ----------------- | -------------------- | ---------------- | ---------------------------------------- |
 | name              | string               | none             | required                                 |
 | fieldRef          | React.createRef      | none             | to be able access field methods.         |
 | component         | React.ClassComponent | none             | required                                 |
@@ -79,12 +79,12 @@ import { Field } from '@traveloka/react-schema-form';  // ES6
 | validateOnChange  | boolean              | false            | will auto validate when value is changes |
 | normalize         | function             | (value) => value | will serialize the value                 |
 | defaultValue      | any                  |                  | default value.                           |
-| rules             | func | array of func |                  |                                          |
+| rules             | func                 | array of func    |                                          |  |
 
 #### Methods
 
-| Methods                                               | Description                                              |
-|-------------------------------------------------------|----------------------------------------------------------|
+| Methods                                                 | Description                                              |
+| ------------------------------------------------------- | -------------------------------------------------------- |
 | `getValue() => any`                                     | return current field value                               |
 | `setValue(newValue: any) => any`                        | set current field value                                  |
 | `getError() => ValidationResult`                        | return current field error message                       |
@@ -174,14 +174,16 @@ import MyErrorableInput from './MyErrorableInput';
 
 #### Props
 
-| Property          | Type                 | Default Value    | Description                              |
-|-------------------|----------------------|------------------|------------------------------------------|
-| fieldRef          | React.createRef      | none             | to be able access field methods.         |
+| Property  | Type            | Default Value | Description                               |
+| --------- | --------------- | ------------- | ----------------------------------------- |
+| array     | boolean         | false         | would return the values as array          |
+| normalize | function        | (val) => val  | a function that normalize the form values |
+| fieldRef  | React.createRef | none          | to be able access field methods.          |
 
 #### Methods
 
-| Methods                                                                       | Description                                                    |
-|-------------------------------------------------------------------------------|----------------------------------------------------------------|
+| Methods                                                                         | Description                                                    |
+| ------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | `getValue() => ValueByFieldName`                                                | return form value by fieldName                                 |
 | `setValue(newValue: ValueByFieldName) => ValueByFieldName`                      | set form value by fieldName                                    |
 | `getError() => ValidationResultByFieldName`                                     | return form error message by fieldName                         |
