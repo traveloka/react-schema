@@ -1,16 +1,17 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { FormInterface, FieldInterface } from '../types';
-import { withForm } from '../Form/FormContext';
+import { FormInterface, FieldInterface } from "../types";
+import { withForm } from "../Form/FormContext";
 
 type FormFieldProps = {
-  name?: string,
-  [prop: string]: any,
-}
+  name?: string;
+  [prop: string]: any;
+};
 
-export default function registerField(WrapperComponent: React.ComponentClass<any, any>): React.ComponentClass<any, any> {
+export default function registerField(
+  WrapperComponent: React.ComponentClass<any, any>
+): React.ComponentClass<any, any> {
   const Wrapper = class extends React.Component<FormFieldProps, any> {
-
     public componentWillUnmount() {
       const { form, name } = this.props;
       if (form) {
@@ -40,10 +41,13 @@ export default function registerField(WrapperComponent: React.ComponentClass<any
         console.warn(`FormFieldComponent didn't have any name!`);
         return;
       }
-      form.fields[name] = el;
-    }
+      if (!form.fields[name]) {
+        form.fields[name] = el;
+        form.notifyOnChange(name, el.getValue());
+      }
+    };
 
-    public handleSubscribeOnChange = (value: any, form ?: FormInterface) => {
+    public handleSubscribeOnChange = (value: any, form?: FormInterface) => {
       const { name } = this.props;
       if (form && name) {
         form.notifyOnChange(name, value);
@@ -51,9 +55,9 @@ export default function registerField(WrapperComponent: React.ComponentClass<any
       if (this.props.onChange) {
         this.props.onChange(value);
       }
-    }
+    };
 
-    public handleSubscribeOnError = (error: any, form ?: FormInterface) => {
+    public handleSubscribeOnError = (error: any, form?: FormInterface) => {
       const { name } = this.props;
       if (form && name) {
         form.notifyOnError(name, error);
@@ -61,7 +65,7 @@ export default function registerField(WrapperComponent: React.ComponentClass<any
       if (this.props.onError) {
         this.props.onError(error);
       }
-    }
-  }
+    };
+  };
   return withForm(Wrapper);
 }

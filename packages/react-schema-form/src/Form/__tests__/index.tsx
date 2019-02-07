@@ -310,4 +310,48 @@ describe("test Form", () => {
     const stateEl = testInstance.findByType(TComp).instance;
     expect(stateEl.props.values).toMatchObject(["jacky", "wijaya"]);
   });
+
+  it("[props onChange] props onChange should give correct values", () => {
+    class FirstField extends React.Component<any> {
+      public render() {
+        return null;
+      }
+    }
+    class LastField extends React.Component<any> {
+      public render() {
+        return null;
+      }
+    }
+    class TComp extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    let form = null;
+    const onChangeMock = jest.fn();
+    const testRenderer = TestRenderer.create(
+      <FormComponent fieldRef={el => (form = el)} onChange={onChangeMock}>
+        {state => (
+          <>
+            <Field name="first" component={FirstField} defaultValue="jacky" />
+            <Field name="last" component={LastField} defaultValue="wijaya" />
+            <TComp {...state} />
+          </>
+        )}
+      </FormComponent>
+    );
+    expect(onChangeMock).toHaveBeenCalledWith({
+      first: "jacky",
+      last: "wijaya"
+    });
+    onChangeMock.mockClear();
+    const testInstance = testRenderer.root;
+    const firstEl = testInstance.findByType(FirstField).instance;
+    const lastEl = testInstance.findByType(LastField).instance;
+    firstEl.props.onChange("jeki");
+    expect(onChangeMock).toHaveBeenCalledWith({
+      first: "jeki",
+      last: "wijaya"
+    });
+  });
 });
