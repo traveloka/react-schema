@@ -53,6 +53,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
         value={this.getValue()}
         isDirty={this.isDirty()}
         error={this.getError()}
+        name={name}
         {...rest}
         onChange={this.handleOnChange}
       />
