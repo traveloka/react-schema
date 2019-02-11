@@ -2,6 +2,7 @@ import * as React from "react";
 import { Rule, ValidationResult, validate } from "@traveloka/validation";
 import { FieldInterface } from "../types";
 import registerField from "./registerField";
+import * as _ from "lodash";
 
 type FieldProps = {
   component: React.ComponentClass<any, any>;
@@ -140,7 +141,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
 
   public isDirty = () => {
     const { value, defaultValue } = this.state;
-    return value !== defaultValue;
+    return !_.isEqual(value, defaultValue);
   };
 
   public hasError = () => {
