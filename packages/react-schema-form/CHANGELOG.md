@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.3.0"></a>
+# [3.3.0](https://github.com/Jekiwijaya/react-schema/compare/v3.2.3...v3.3.0) (2019-02-16)
+
+
+### Features
+
+* **form:** pass error as children in function ([5f804f4](https://github.com/Jekiwijaya/react-schema/commit/5f804f4))
+
+
+
+
+
 <a name="3.2.3"></a>
 ## [3.2.3](https://github.com/Jekiwijaya/react-schema/compare/v3.2.2...v3.2.3) (2019-02-11)
 
