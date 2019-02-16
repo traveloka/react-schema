@@ -212,7 +212,6 @@ describe("test Field Component", () => {
     const fieldEl = testInstance.findByType(FieldComponent);
     expect(fieldEl.props.name).toEqual("test-name");
     expect(fieldEl.props.label).toEqual("label");
-    console.log(fieldEl.props);
   });
 
   it("[props] isDirty, isDirty should work as expected", () => {

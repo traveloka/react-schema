@@ -192,6 +192,7 @@ import MyErrorableInput from './MyErrorableInput';
 | normalize | function        | (val) => val  | a function that normalize the form values |
 | fieldRef  | React.createRef | none          | to be able access field methods.          |
 
+
 #### Methods
 
 | Methods                                                                         | Description                                                    |
@@ -213,6 +214,15 @@ import MyErrorableInput from './MyErrorableInput';
 | `getErrorField(fieldName: string) => ValidationResult`                          | return field error message                                     |
 | `setErrorField(fieldName: string, error: ValidationResult) => ValidationResult` | set field error message                                        |
 | `validateField(fieldName: string) => ValidationResult`                          | validate specify field                                         |
+
+#### Children Function Params
+
+| Property | Type                             | Description                                            |
+| -------- | -------------------------------- | ------------------------------------------------------ |
+| values   | [name: string]: any              | form value by fieldName                                |
+| isDirty  | boolean                          | true if some field value is not same with defaultValue |
+| hasError | boolean                          | true if some field have an error                       |
+| error    | [name: string]: ValidationResult | form error message by fieldName                        |
 
 ## Nested Forms
 You could also build a nested form like this
