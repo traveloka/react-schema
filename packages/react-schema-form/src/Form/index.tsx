@@ -57,7 +57,8 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
     const result = {
       values: this.getValue(),
       isDirty: this.isDirty(),
-      hasError: this.hasError()
+      hasError: this.hasError(),
+      error: this.getError()
     };
     return result;
   };
