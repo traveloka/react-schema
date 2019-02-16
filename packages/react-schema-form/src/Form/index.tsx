@@ -18,6 +18,7 @@ type FormState = {};
 
 type FormProps = {
   onChange?: (value: any) => any;
+  onError?: (error: any) => any;
   children?: any;
   array?: boolean;
   normalize: (value: any) => any;
@@ -235,6 +236,7 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
 
   private handleFieldOnError = () => {
     if (this.isChildrenAFunction()) this.forceUpdate();
+    if (this.props.onError) this.props.onError(this.getError());
   };
 
   private isChildrenAFunction = (): boolean => {

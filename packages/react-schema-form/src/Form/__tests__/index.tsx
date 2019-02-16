@@ -232,6 +232,69 @@ describe("test Form", () => {
     });
   });
 
+  it("[nested form] error should be passed", () => {
+    const required = value => (!!value ? null : "required");
+    let form = null;
+    let formProfile = null;
+    class EmailField extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    class FirstField extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    class LastField extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    class TComp extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    class TComp2 extends React.Component<{ title: string }> {
+      public render() {
+        return null;
+      }
+    }
+    const testRenderer = TestRenderer.create(
+      <FormComponent fieldRef={el => (form = el)}>
+        {state => (
+          <>
+            <Field name="email" component={EmailField} />
+            <FormComponent name="profile" fieldRef={el => (formProfile = el)}>
+              {state2 => (
+                <>
+                  <Field name="first" component={FirstField} rules={required} />
+                  <Field name="last" component={LastField} rules={required} />
+                  <TComp2 {...state2} />
+                </>
+              )}
+            </FormComponent>
+            <TComp {...state} />
+          </>
+        )}
+      </FormComponent>
+    );
+    const testInstance = testRenderer.root;
+    const emailEl = testInstance.findByType(EmailField).instance;
+    const firstEl = testInstance.findByType(FirstField).instance;
+    const lastEl = testInstance.findByType(LastField).instance;
+    const stateEl = testInstance.findByType(TComp).instance;
+    const state2El = testInstance.findByType(TComp2).instance;
+    formProfile.validate();
+    expect(state2El.props.hasError).toEqual(true);
+    expect(stateEl.props.hasError).toEqual(true);
+    firstEl.props.onChange("jacky");
+    lastEl.props.onChange("wijaya");
+    expect(state2El.props.hasError).toEqual(false);
+    expect(stateEl.props.hasError).toEqual(false);
+  });
+
   it("[props array] should return values as array", () => {
     class FirstField extends React.Component<any> {
       public render() {
