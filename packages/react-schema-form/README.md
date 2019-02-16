@@ -96,6 +96,18 @@ import { Field } from '@traveloka/react-schema-form';  // ES6
 | `hasError() => boolean`                                 | return true if field have an error                       |
 | `isDirty() => boolean`                                  | return true if field value is not same with defaultValue |
 
+#### Given Props to Field Component
+
+
+| Methods                | Description                         |
+| ---------------------- | ----------------------------------- |
+| `name: String`         | the Field name                      |
+| `label: String`        | UC Words of name                    |
+| `isDirty: Boolean`     | state of the changes value of field |
+| `error: String | null` | field error                         |
+| `onChange: (v) => any` | function to change field value      |
+| `value: any`           | the value of field                  |
+
 #### Usage
 ##### 1. A Component
 This can be any component class that you have written or have imported from a third party library.

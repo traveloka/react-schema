@@ -203,6 +203,18 @@ describe("test Field Component", () => {
     expect(fieldEl.props.value).toEqual("123-456-78");
   });
 
+  it("[props] name, label", () => {
+    let field = null;
+    const testRenderer = TestRenderer.create(
+      <Field component={FieldComponent} name="test-name" label="label" />
+    );
+    const testInstance = testRenderer.root;
+    const fieldEl = testInstance.findByType(FieldComponent);
+    expect(fieldEl.props.name).toEqual("test-name");
+    expect(fieldEl.props.label).toEqual("label");
+    console.log(fieldEl.props);
+  });
+
   it("[props] isDirty, isDirty should work as expected", () => {
     let field = null;
     const testRenderer = TestRenderer.create(
