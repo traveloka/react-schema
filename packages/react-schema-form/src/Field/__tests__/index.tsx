@@ -203,6 +203,28 @@ describe("test Field Component", () => {
     expect(fieldEl.props.value).toEqual("123-456-78");
   });
 
+  it("[props] normalize, defaultValue should be normalize", () => {
+    let field = null;
+    const testRenderer = TestRenderer.create(
+      <Field
+        component={FieldComponent}
+        fieldRef={el => (field = el)}
+        normalize={(value = "") =>
+          (value.replace(/[^\d]/g, "").match(/.{1,3}/g) || []).join("-")
+        }
+        defaultValue="12345"
+      />
+    );
+    const testInstance = testRenderer.root;
+    const fieldEl = testInstance.findByType(FieldComponent);
+    expect(fieldEl.props.value).toEqual("123-45");
+    expect(fieldEl.props.isDirty).toEqual(false);
+    field.setValue("123-45678");
+    expect(fieldEl.props.value).toEqual("123-456-78");
+    expect(fieldEl.props.isDirty).toEqual(true);
+    expect(field.getDefaultValue()).toEqual("123-45");
+  });
+
   it("[props] name, label", () => {
     let field = null;
     const testRenderer = TestRenderer.create(
@@ -261,5 +283,73 @@ describe("test Field Component", () => {
       last: "last name"
     });
     expect(fieldComponent.props.isDirty).toEqual(true);
+  });
+
+  it("[props value] should using controlled value", () => {
+    let field = null;
+    class StateM extends React.Component {
+      public render() {
+        return this.props.children(this.state);
+      }
+    }
+    const testRenderer = TestRenderer.create(
+      <StateM>
+        {value => (
+          <Field
+            component={FieldComponent}
+            fieldRef={el => {
+              field = el;
+            }}
+            value={value}
+          />
+        )}
+      </StateM>
+    );
+    const testInstance = testRenderer.root;
+    const fieldComponent = testInstance.findByType(FieldComponent);
+    const stateComponent = testInstance.findByType(StateM);
+    stateComponent.instance.setState({
+      first: "first name"
+    });
+    expect(field.getValue()).toMatchObject({
+      first: "first name"
+    });
+    stateComponent.instance.setState({
+      first: "first name",
+      last: "last name"
+    });
+    expect(field.getValue()).toMatchObject({
+      first: "first name",
+      last: "last name"
+    });
+  });
+
+  it("[props value] should using controlled value (number)", () => {
+    let field = null;
+    class StateM extends React.Component {
+      public render() {
+        return this.props.children(this.state || {});
+      }
+    }
+    const testRenderer = TestRenderer.create(
+      <StateM>
+        {({ value }) => (
+          <Field
+            component={FieldComponent}
+            fieldRef={el => {
+              field = el;
+            }}
+            value={value}
+          />
+        )}
+      </StateM>
+    );
+    const testInstance = testRenderer.root;
+    const fieldComponent = testInstance.findByType(FieldComponent);
+    const stateComponent = testInstance.findByType(StateM);
+    stateComponent.instance.setState({ value: 3 });
+    expect(field.getValue()).toEqual(3);
+    stateComponent.instance.setState({ value: 5 });
+    expect(field.getValue()).toEqual(5);
   });
 });

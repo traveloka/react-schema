@@ -36,13 +36,19 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
     super(props);
     this.state = {
       value: props.normalize(props.value || props.defaultValue),
-      defaultValue: props.defaultValue,
+      defaultValue: props.normalize(props.defaultValue),
       error: null
     };
   }
 
   public componentDidMount() {
     if (this.props.onChange) this.props.onChange(this.getValue());
+  }
+
+  public componentDidUpdate(prevProps: FieldProps, prevState: FieldState) {
+    if (!_.isEqual(prevProps.value, this.props.value)) {
+      this.setValue(this.props.value);
+    }
   }
 
   public render() {
@@ -69,7 +75,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
   };
 
   public getValue = (): any => {
-    return this.props.normalize(this.props.value || this.state.value);
+    return this.state.value;
   };
 
   public setValue = (dirtyValue: any): void => {
