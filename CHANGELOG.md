@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.3.3"></a>
+## [3.3.3](https://github.com/Jekiwijaya/react-schema/compare/v3.3.2...v3.3.3) (2019-02-26)
+
+
+### Bug Fixes
+
+* **Field:** should able use controllable value ([8623762](https://github.com/Jekiwijaya/react-schema/commit/8623762))
+
+
+
+
+
 <a name="3.3.2"></a>
 ## [3.3.2](https://github.com/Jekiwijaya/react-schema/compare/v3.3.1...v3.3.2) (2019-02-16)
 
