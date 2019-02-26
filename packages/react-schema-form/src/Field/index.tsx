@@ -57,11 +57,11 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
     return (
       <WrapperComponent
         label={label}
-        value={this.getValue()}
         isDirty={this.isDirty()}
         error={this.getError()}
         name={name}
         {...rest}
+        value={this.getValue()}
         onChange={this.handleOnChange}
       />
     );
