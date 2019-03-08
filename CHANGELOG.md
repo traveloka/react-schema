@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.3.5"></a>
+## [3.3.5](https://github.com/Jekiwijaya/react-schema/compare/v3.3.4...v3.3.5) (2019-03-08)
+
+
+### Bug Fixes
+
+* add missing depedency lodash ([4a923cd](https://github.com/Jekiwijaya/react-schema/commit/4a923cd))
+
+
+
+
+
 <a name="3.3.4"></a>
 ## [3.3.4](https://github.com/Jekiwijaya/react-schema/compare/v3.3.3...v3.3.4) (2019-02-26)
 
