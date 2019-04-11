@@ -2,7 +2,7 @@ import * as React from "react";
 import { Rule, ValidationResult, validate } from "@traveloka/validation";
 import { FieldInterface } from "../types";
 import registerField from "./registerField";
-import * as _ from "lodash";
+import isEqual = require("lodash/isEqual");
 
 type FieldProps = {
   component: React.ComponentClass<any, any>;
@@ -46,7 +46,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
   }
 
   public componentDidUpdate(prevProps: FieldProps, prevState: FieldState) {
-    if (!_.isEqual(prevProps.value, this.props.value)) {
+    if (!isEqual(prevProps.value, this.props.value)) {
       this.setValue(this.props.value);
     }
   }
@@ -147,7 +147,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
 
   public isDirty = () => {
     const { value, defaultValue } = this.state;
-    return !_.isEqual(value, defaultValue);
+    return !isEqual(value, defaultValue);
   };
 
   public hasError = () => {
