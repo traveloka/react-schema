@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.3.6"></a>
+## [3.3.6](https://github.com/Jekiwijaya/react-schema/compare/v3.3.5...v3.3.6) (2019-04-11)
+
+
+### Bug Fixes
+
+* lodash using tree shaking ([26073b8](https://github.com/Jekiwijaya/react-schema/commit/26073b8))
+
+
+
+
+
 <a name="3.3.5"></a>
 ## [3.3.5](https://github.com/Jekiwijaya/react-schema/compare/v3.3.4...v3.3.5) (2019-03-08)
 

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.3.6"></a>
+## [3.3.6](https://github.com/Jekiwijaya/react-schema/compare/v3.3.5...v3.3.6) (2019-04-11)
+
+**Note:** Version bump only for package @traveloka/validation
+
+
+
+
+
 <a name="3.1.6"></a>
 ## [3.1.6](https://github.com/Jekiwijaya/react-schema/compare/v3.1.5...v3.1.6) (2019-01-16)
 
