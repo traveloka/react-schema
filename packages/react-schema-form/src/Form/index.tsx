@@ -19,7 +19,6 @@ type FormState = {};
 type FormProps = {
   onChange?: (value: any) => any;
   onError?: (error: any) => any;
-  children?: any;
   array?: boolean;
   normalize: (value: any) => any;
 };
@@ -47,7 +46,7 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
   public render() {
     return (
       <FormContext.Provider value={this.getContextType()}>
-        {this.isChildrenAFunction()
+        {this.isChildrenAFunction(this.props.children)
           ? this.props.children(this.getFormState())
           : this.props.children}
       </FormContext.Provider>
@@ -226,21 +225,23 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
     if (this.fields[name]) {
       delete this.fields[name];
     }
-    if (this.isChildrenAFunction()) this.forceUpdate();
+    if (this.isChildrenAFunction(this.props.children)) this.forceUpdate();
   };
 
   private handleFieldOnChange = (name: string, value: any) => {
-    if (this.isChildrenAFunction()) this.forceUpdate();
+    if (this.isChildrenAFunction(this.props.children)) this.forceUpdate();
     if (this.props.onChange) this.props.onChange(this.getValue());
   };
 
   private handleFieldOnError = () => {
-    if (this.isChildrenAFunction()) this.forceUpdate();
+    if (this.isChildrenAFunction(this.props.children)) this.forceUpdate();
     if (this.props.onError) this.props.onError(this.getError());
   };
 
-  private isChildrenAFunction = (): boolean => {
-    return typeof this.props.children === "function";
+  private isChildrenAFunction = (
+    children: any
+  ): children is (args: any) => any => {
+    return typeof children === "function";
   };
 }
 

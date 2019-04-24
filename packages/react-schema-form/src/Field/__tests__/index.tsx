@@ -352,4 +352,30 @@ describe("test Field Component", () => {
     stateComponent.instance.setState({ value: 5 });
     expect(field.getValue()).toEqual(5);
   });
+
+  it("[function getValue] should return the latest onChange value", () => {
+    jest.useFakeTimers();
+    let field = null;
+    class StateM extends React.Component {
+      public render() {
+        return this.props.children(this.state || {});
+      }
+    }
+    const testRenderer = TestRenderer.create(
+      <StateM>
+        {({ value }) => (
+          <Field
+            component={FieldComponent}
+            fieldRef={el => {
+              field = el;
+            }}
+          />
+        )}
+      </StateM>
+    );
+    const testInstance = testRenderer.root;
+    const fieldComponent = testInstance.findByType(FieldComponent);
+    fieldComponent.props.onChange(3);
+    expect(field.getValue()).toEqual(3);
+  });
 });

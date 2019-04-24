@@ -32,6 +32,10 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
     normalize: (value: any) => value
   };
 
+  private _value?: any; //deferred value, to handle async setState
+  private _error?: any; //deferred error, to handle async setState
+  private _defaultValue?: any; //deferred defaultValue, to handle async setState
+
   constructor(props: any) {
     super(props);
     this.state = {
@@ -75,42 +79,47 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
   };
 
   public getValue = (): any => {
-    return this.state.value;
+    return this._value || this.state.value;
   };
 
   public setValue = (dirtyValue: any): void => {
     const value = this.props.normalize(dirtyValue);
+
+    this._value = value; // update deferred value
     this.setState(
       {
         value
       },
       () => {
-        const { revalidateOnError, validateOnChange } = this.props;
-        if (validateOnChange || (revalidateOnError && this.getError())) {
-          this.validate();
-        }
-        if (this.props.onChange) {
-          this.props.onChange(value);
-        }
+        this._value = null; // clear deferred value
       }
     );
+    const { revalidateOnError, validateOnChange } = this.props;
+    if (validateOnChange || (revalidateOnError && this.getError())) {
+      this.validate();
+    }
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
   };
 
   public getError = () => {
-    return this.state.error;
+    return this._error || this.state.error;
   };
 
   public setError = (error: ValidationResult) => {
+    this._error = error;
     this.setState(
       {
         error
       },
       () => {
-        if (this.props.onError) {
-          this.props.onError(error);
-        }
+        this._error = null;
       }
     );
+    if (this.props.onError) {
+      this.props.onError(error);
+    }
     return error;
   };
 
@@ -131,18 +140,20 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
   };
 
   public initialize = (value: any) => {
+    this._defaultValue = value;
     this.setState(
       {
         defaultValue: value
       },
       () => {
-        this.setValue(value);
+        this._defaultValue = null;
       }
     );
+    this.setValue(value);
   };
 
   public getDefaultValue = () => {
-    return this.state.defaultValue;
+    return this._defaultValue || this.state.defaultValue;
   };
 
   public isDirty = () => {
