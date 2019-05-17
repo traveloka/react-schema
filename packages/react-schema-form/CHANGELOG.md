@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.3.8"></a>
+## [3.3.8](https://github.com/Jekiwijaya/react-schema/compare/v3.3.7...v3.3.8) (2019-05-17)
+
+
+### Bug Fixes
+
+* **Form:** children values boolean is incorrect ([a250c79](https://github.com/Jekiwijaya/react-schema/commit/a250c79))
+
+
+
+
+
 <a name="3.3.7"></a>
 ## [3.3.7](https://github.com/Jekiwijaya/react-schema/compare/v3.3.6...v3.3.7) (2019-04-24)
 
