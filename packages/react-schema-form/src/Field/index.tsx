@@ -32,9 +32,9 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
     normalize: (value: any) => value
   };
 
-  private _value?: any; //deferred value, to handle async setState
-  private _error?: any; //deferred error, to handle async setState
-  private _defaultValue?: any; //deferred defaultValue, to handle async setState
+  private _value: any = null; //deferred value, to handle async setState
+  private _error: any = null; //deferred error, to handle async setState
+  private _defaultValue: any = null; //deferred defaultValue, to handle async setState
 
   constructor(props: any) {
     super(props);
@@ -79,7 +79,8 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
   };
 
   public getValue = (): any => {
-    return this._value || this.state.value;
+    if (this._value !== null) return this._value;
+    return this.state.value;
   };
 
   public setValue = (dirtyValue: any): void => {
@@ -104,7 +105,8 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
   };
 
   public getError = () => {
-    return this._error || this.state.error;
+    if (this._error !== null) return this._error;
+    return this.state.error;
   };
 
   public setError = (error: ValidationResult) => {
@@ -153,7 +155,8 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
   };
 
   public getDefaultValue = () => {
-    return this._defaultValue || this.state.defaultValue;
+    if (this._defaultValue !== null) return this._defaultValue;
+    return this.state.defaultValue;
   };
 
   public isDirty = () => {

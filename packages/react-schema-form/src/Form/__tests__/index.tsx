@@ -31,6 +31,37 @@ describe("test Form", () => {
         })
       ).toBeTruthy();
     });
+
+    it("values should be correct", () => {
+      let form = null;
+      class CheckboxField extends React.Component<any> {
+        public render() {
+          return null;
+        }
+      }
+      class TComp extends React.Component<{ isChecked: boolean }> {
+        public render() {
+          return null;
+        }
+      }
+      const testRenderer = TestRenderer.create(
+        <FormComponent fieldRef={el => (form = el)}>
+          {state => (
+            <>
+              <Field name="checked" component={CheckboxField} />
+              <TComp isChecked={state.values.checked} />
+            </>
+          )}
+        </FormComponent>
+      );
+      const testInstance = testRenderer.root;
+      const inputEl = testInstance.findByType(CheckboxField).instance;
+      const textEl = testInstance.findByType(TComp).instance;
+      inputEl.props.onChange(true);
+      expect(textEl.props.isChecked).toEqual(true);
+      inputEl.props.onChange(false);
+      expect(textEl.props.isChecked).toEqual(false);
+    });
   });
 
   describe("test notifyOnChange", () => {

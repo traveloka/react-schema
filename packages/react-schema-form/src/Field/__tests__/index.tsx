@@ -51,6 +51,25 @@ describe("test Field Component", () => {
     expect(field.getError()).toBeFalsy();
   });
 
+  it("[value boolean] should have expected value", () => {
+    let field = null;
+    const testRenderer = TestRenderer.create(
+      <Field
+        component={FieldComponent}
+        fieldRef={el => {
+          field = el;
+        }}
+      />
+    );
+    const testInstance = testRenderer.root;
+    const fieldComponent = testInstance.findByType(FieldComponent);
+    expect(fieldComponent.props.value).toBeFalsy();
+    fieldComponent.props.onChange(true);
+    expect(fieldComponent.props.value).toEqual(true);
+    fieldComponent.props.onChange(false);
+    expect(fieldComponent.props.value).toEqual(false);
+  });
+
   it("should have expected value from default value", () => {
     let field = null;
     const testRenderer = TestRenderer.create(
@@ -356,26 +375,18 @@ describe("test Field Component", () => {
   it("[function getValue] should return the latest onChange value", () => {
     jest.useFakeTimers();
     let field = null;
-    class StateM extends React.Component {
-      public render() {
-        return this.props.children(this.state || {});
-      }
-    }
     const testRenderer = TestRenderer.create(
-      <StateM>
-        {({ value }) => (
-          <Field
-            component={FieldComponent}
-            fieldRef={el => {
-              field = el;
-            }}
-          />
-        )}
-      </StateM>
+      <Field
+        component={FieldComponent}
+        fieldRef={el => {
+          field = el;
+        }}
+      />
     );
     const testInstance = testRenderer.root;
     const fieldComponent = testInstance.findByType(FieldComponent);
     fieldComponent.props.onChange(3);
     expect(field.getValue()).toEqual(3);
+    jest.clearAllTimers();
   });
 });
