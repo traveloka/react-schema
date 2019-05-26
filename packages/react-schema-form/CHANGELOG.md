@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.4.0"></a>
+# [3.4.0](https://github.com/Jekiwijaya/react-schema/compare/v3.3.8...v3.4.0) (2019-05-26)
+
+
+### Features
+
+* **FIeld:** value should be changes if defaultValue changed. ([e1ada6d](https://github.com/Jekiwijaya/react-schema/commit/e1ada6d))
+
+
+
+
+
 <a name="3.3.8"></a>
 ## [3.3.8](https://github.com/Jekiwijaya/react-schema/compare/v3.3.7...v3.3.8) (2019-05-17)
 
