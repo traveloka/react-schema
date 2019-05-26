@@ -53,6 +53,9 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
     if (!isEqual(prevProps.value, this.props.value)) {
       this.setValue(this.props.value);
     }
+    if (!isEqual(prevProps.defaultValue, this.props.defaultValue)) {
+      this.initialize(this.props.defaultValue);
+    }
   }
 
   public render() {

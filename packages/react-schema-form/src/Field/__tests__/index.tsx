@@ -87,6 +87,35 @@ describe("test Field Component", () => {
     expect(fieldComponent.props.value).toEqual("default value");
   });
 
+  it("[props defaultValue] value should changed if defaultValue changed", () => {
+    let field = null;
+    class StateM extends React.Component {
+      public render() {
+        return this.props.children(this.state || {});
+      }
+    }
+    const testRenderer = TestRenderer.create(
+      <StateM>
+        {({ value }) => (
+          <Field
+            component={FieldComponent}
+            fieldRef={el => {
+              field = el;
+            }}
+            defaultValue={value}
+          />
+        )}
+      </StateM>
+    );
+    const testInstance = testRenderer.root;
+    const fieldComponent = testInstance.findByType(FieldComponent);
+    const stateComponent = testInstance.findByType(StateM);
+    stateComponent.instance.setState({ value: "value 1" });
+    expect(field.getValue()).toEqual("value 1");
+    stateComponent.instance.setState({ value: "value 2" });
+    expect(field.getValue()).toEqual("value 2");
+  });
+
   it("should have expected error", () => {
     const rule = () => "invalid";
     let field = null;
