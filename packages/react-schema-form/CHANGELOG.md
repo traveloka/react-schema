@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="3.4.2"></a>
+## [3.4.2](https://github.com/Jekiwijaya/react-schema/compare/v3.4.1...v3.4.2) (2019-06-02)
+
+
+### Bug Fixes
+
+* **Field:** isDirty should access prune value instead state, this makes Form isDirty late updated ([a11b186](https://github.com/Jekiwijaya/react-schema/commit/a11b186))
+
+
+
+
+
 <a name="3.4.1"></a>
 ## [3.4.1](https://github.com/Jekiwijaya/react-schema/compare/v3.4.0...v3.4.1) (2019-05-26)
 
