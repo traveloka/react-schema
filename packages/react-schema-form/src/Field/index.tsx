@@ -126,7 +126,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
   };
 
   public reset = () => {
-    this.setValue(this.state.defaultValue);
+    this.setValue(this.getDefaultValue());
     this.setError(null);
   };
 
@@ -160,8 +160,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
   };
 
   public isDirty = () => {
-    const { value, defaultValue } = this.state;
-    return !isEqual(value, defaultValue);
+    return !isEqual(this.getValue(), this.getDefaultValue());
   };
 
   public hasError = () => {
