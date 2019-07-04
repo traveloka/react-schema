@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as createReactContext from 'create-react-context';
+import React from 'react';
+import createReactContext from 'create-react-context';
 import { FieldByName, FormInterface } from '../types';
 
 type FormContextValue = {
