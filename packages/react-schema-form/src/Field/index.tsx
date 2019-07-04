@@ -2,10 +2,19 @@ import * as React from "react";
 import { Rule, ValidationResult, validate } from "@traveloka/validation";
 import { FieldInterface } from "../types";
 import registerField from "./registerField";
-import isEqual = require("lodash/isEqual");
+import isEqual from "lodash/isEqual";
+
+type ComponentProps = {
+  value: any;
+  onChange: (value: any) => void;
+  label?: string;
+  isDirty?: boolean;
+  error?: string;
+  name?: string;
+};
 
 type FieldProps = {
-  component: React.ComponentClass<any, any>;
+  component: React.ComponentClass<ComponentProps, any>;
   revalidateOnError?: boolean;
   validateOnChange?: boolean;
   normalize: (value: any) => any;
@@ -135,7 +144,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
   };
 
   public ucwords = (str?: string) => {
-    if (!str) return null;
+    if (!str) return;
     return str.toLowerCase().replace(/\b[a-z]/g, letter => {
       return letter.toUpperCase();
     });
