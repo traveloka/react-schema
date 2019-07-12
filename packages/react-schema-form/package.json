@@ -19,7 +19,7 @@
     "@traveloka/react-schema": "^3.3.6",
     "@traveloka/validation": "^3.3.6",
     "create-react-context": "^0.2.3",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.13"
   },
   "peerDependencies": {
     "react": "*"
