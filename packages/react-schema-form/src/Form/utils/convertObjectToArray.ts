@@ -1,4 +1,4 @@
-import { ValueByName } from './../../types/Form.d';
+import { ValueByName } from './../../types';
 
 export default function convertObjectToArray(obj: ValueByName) {
   const arr: Array<number> = [];
