@@ -338,14 +338,6 @@
     "@types/istanbul-lib-coverage" "^2.0.0"
     "@types/yargs" "^12.0.9"
 
-"@traveloka/react-schema@^3.4.3":
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/@traveloka/react-schema/-/react-schema-3.4.3.tgz#2a62b06afe61dc69359fb85ee8a55ebd95a4ac87"
-
-"@traveloka/validation@^3.4.3":
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/@traveloka/validation/-/validation-3.4.3.tgz#3b86ff7f92a93eb31187d1adf14e6511d5ac1ca2"
-
 "@types/babel__core@^7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.0.tgz#710f2487dda4dcfd010ca6abb2b4dc7394365c51"
