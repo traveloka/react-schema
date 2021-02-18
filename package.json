@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "lerna": "^3.0.0-rc.0"
+    "lerna": "^3.22.1"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
+    "@types/node": "11.15.20",
     "ts-jest": "20.0.14",
-    "typescript": "^3.0.1",
+    "typescript": "^3.9.9",
     "cz-conventional-changelog": "^2.1.0"
   },
   "scripts": {
