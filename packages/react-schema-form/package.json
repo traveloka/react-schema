@@ -18,7 +18,7 @@
   "dependencies": {
     "@traveloka/react-schema": "^3.4.4",
     "@traveloka/validation": "^3.4.4",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.19"
   },
   "peerDependencies": {
     "react": "*"
