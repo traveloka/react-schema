@@ -67,3 +67,12 @@ export interface FormInterface extends FormFieldInterface {
   setErrorField: (name: string, error: FormFieldValidationResult) => FormFieldValidationResult,
   validateField: (name: string) => FormFieldValidationResult,
 }
+
+export type FieldComponentProps<T = any> = {
+  value: T;
+  onChange: (value: T) => void;
+  label?: string;
+  isDirty?: boolean;
+  error?: string;
+  name?: string;
+};

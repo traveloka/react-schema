@@ -1,17 +1,8 @@
 import * as React from "react";
 import { Rule, ValidationResult, validate } from "@traveloka/validation";
-import { FieldInterface } from "../types";
+import { FieldInterface, FieldComponentProps } from "../types";
 import registerField from "./registerField";
 import isEqual from "lodash/isEqual";
-
-export type FieldComponentProps<T = any> = {
-  value: T;
-  onChange: (value: T) => void;
-  label?: string;
-  isDirty?: boolean;
-  error?: string;
-  name?: string;
-};
 
 export type FieldProps<T = any> = {
   component: React.ComponentType<FieldComponentProps<T> & {[key: string]: any}>;
