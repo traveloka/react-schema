@@ -14,7 +14,7 @@ export type FieldComponentProps<T = any> = {
 };
 
 export type FieldProps<T = any> = {
-  component: React.ComponentType<FieldComponentProps<T>>;
+  component: React.ComponentType<FieldComponentProps<T> & {[key: string]: any}>;
   revalidateOnError?: boolean;
   validateOnChange?: boolean;
   normalize: (value: T) => T;
