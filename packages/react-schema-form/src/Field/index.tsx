@@ -1,35 +1,35 @@
 import * as React from "react";
 import { Rule, ValidationResult, validate } from "@traveloka/validation";
-import { FieldInterface } from "../types";
+import { FieldInterface, FieldComponentProps } from "../types";
 import registerField from "./registerField";
-import isEqual = require("lodash/isEqual");
+import isEqual from "lodash/isEqual";
 
-type FieldProps = {
-  component: React.ComponentClass<any, any>;
+export type FieldProps<T = any> = {
+  component: React.ComponentType<FieldComponentProps<T> & {[key: string]: any}>;
   revalidateOnError?: boolean;
   validateOnChange?: boolean;
-  normalize: (value: any) => any;
+  normalize: (value: T) => T;
   name?: string;
   label?: string;
-  onChange?: (value: any) => void;
-  onError?: (error: ValidationResult) => any;
-  defaultValue?: any;
+  onChange?: (value: T) => void;
+  onError?: (error: ValidationResult) => T;
+  defaultValue?: T;
   rules?: Rule;
   [key: string]: any;
 };
 
-type FieldState = {
-  value: any;
-  defaultValue: any;
+export type FieldState<T = any> = {
+  value: T;
+  defaultValue: T;
   error: ValidationResult;
 };
 
-class FieldComponent extends React.Component<FieldProps, FieldState>
+class FieldComponent<T> extends React.Component<FieldProps<T>, FieldState<T>>
   implements FieldInterface {
-  public static defaultProps = {
+  public static defaultProps: Pick<FieldProps, 'revalidateOnError' | 'validateOnChange' | 'normalize'> = {
     revalidateOnError: true,
     validateOnChange: false,
-    normalize: (value: any) => value
+    normalize: (value) => value
   };
 
   private _value: any = null; //deferred value, to handle async setState
@@ -135,7 +135,7 @@ class FieldComponent extends React.Component<FieldProps, FieldState>
   };
 
   public ucwords = (str?: string) => {
-    if (!str) return null;
+    if (!str) return;
     return str.toLowerCase().replace(/\b[a-z]/g, letter => {
       return letter.toUpperCase();
     });

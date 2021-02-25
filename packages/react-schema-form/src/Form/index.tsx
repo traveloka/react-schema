@@ -221,7 +221,7 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
     );
   };
 
-  public removeField = (name: string): any => {
+  public removeField = (name: string): void => {
     if (this.fields[name]) {
       delete this.fields[name];
     }
