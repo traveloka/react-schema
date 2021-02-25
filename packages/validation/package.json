@@ -1,6 +1,6 @@
 {
   "name": "@traveloka/validation",
-  "version": "3.4.4",
+  "version": "3.4.5-alpha.0",
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
   "license": "MIT",

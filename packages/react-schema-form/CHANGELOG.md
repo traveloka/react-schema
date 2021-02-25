@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.5-alpha.0](https://github.com/vanydeasy/react-schema/compare/v3.4.4...v3.4.5-alpha.0) (2021-02-25)
+
+
+### Features
+
+* **Types:** Add FieldComponentProps type ([#28](https://github.com/vanydeasy/react-schema/issues/28)) ([001e196](https://github.com/vanydeasy/react-schema/commit/001e19624932c064416df186c5f7b450405d87cc))
+
+
+
+
+
 <a name="3.4.4"></a>
 ## [3.4.4](https://github.com/vanydeasy/react-schema/compare/v3.4.3...v3.4.4) (2020-05-22)
 
