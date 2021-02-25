@@ -1,6 +1,6 @@
 {
   "name": "@traveloka/react-schema-form",
-  "version": "3.4.2",
+  "version": "3.4.4",
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
@@ -16,18 +16,16 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "@traveloka/react-schema": "^3.3.6",
-    "@traveloka/validation": "^3.3.6",
-    "@types/lodash": "^4.14.135",
-    "create-react-context": "^0.2.3",
-    "lodash": "^4.17.11"
+    "@traveloka/react-schema": "^3.4.4",
+    "@traveloka/validation": "^3.4.4",
+    "lodash": "^4.17.21"
   },
   "peerDependencies": {
     "react": "*"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
-    "@types/lodash": "^4.14.120",
+    "@types/lodash": "^4.14.168",
     "@types/react": "^16.4.8",
     "@types/react-dom": "^16.0.7",
     "jest": "^24.7.1",

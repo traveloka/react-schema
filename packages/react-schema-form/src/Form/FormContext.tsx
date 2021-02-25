@@ -1,12 +1,11 @@
 import React from 'react';
-import createReactContext from 'create-react-context';
 import { FieldByName, FormInterface } from '../types';
 
 type FormContextValue = {
   fields: FieldByName
 } | undefined
 
-const FormContext: createReactContext.Context<FormContextValue> = createReactContext<FormContextValue>(undefined);
+const FormContext = React.createContext<FormContextValue>(undefined);
 
 export function withForm(WrapperComponent: React.ComponentClass<any>): React.ComponentClass<any> {
   const Comp = class extends React.Component {

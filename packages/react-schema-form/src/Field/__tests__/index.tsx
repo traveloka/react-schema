@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as TestRenderer from "react-test-renderer";
-import Field from "../../Field";
+import Field, { FieldComponentProps } from "../../Field";
 
-class FieldComponent extends React.Component {
+class FieldComponent extends React.Component<FieldComponentProps> {
   public render() {
     return <input {...this.props} />;
   }

@@ -4,41 +4,41 @@ import { FieldInterface } from "../types";
 import registerField from "./registerField";
 import isEqual from "lodash/isEqual";
 
-type ComponentProps = {
-  value: any;
-  onChange: (value: any) => void;
+export type FieldComponentProps<T = any> = {
+  value: T;
+  onChange: (value: T) => void;
   label?: string;
   isDirty?: boolean;
   error?: string;
   name?: string;
 };
 
-type FieldProps = {
-  component: React.ComponentClass<ComponentProps, any>;
+export type FieldProps<T = any> = {
+  component: React.ComponentType<FieldComponentProps<T>>;
   revalidateOnError?: boolean;
   validateOnChange?: boolean;
-  normalize: (value: any) => any;
+  normalize: (value: T) => T;
   name?: string;
   label?: string;
-  onChange?: (value: any) => void;
-  onError?: (error: ValidationResult) => any;
-  defaultValue?: any;
+  onChange?: (value: T) => void;
+  onError?: (error: ValidationResult) => T;
+  defaultValue?: T;
   rules?: Rule;
   [key: string]: any;
 };
 
-type FieldState = {
-  value: any;
-  defaultValue: any;
+export type FieldState<T = any> = {
+  value: T;
+  defaultValue: T;
   error: ValidationResult;
 };
 
-class FieldComponent extends React.Component<FieldProps, FieldState>
+class FieldComponent<T> extends React.Component<FieldProps<T>, FieldState<T>>
   implements FieldInterface {
-  public static defaultProps = {
+  public static defaultProps: Pick<FieldProps, 'revalidateOnError' | 'validateOnChange' | 'normalize'> = {
     revalidateOnError: true,
     validateOnChange: false,
-    normalize: (value: any) => value
+    normalize: (value) => value
   };
 
   private _value: any = null; //deferred value, to handle async setState

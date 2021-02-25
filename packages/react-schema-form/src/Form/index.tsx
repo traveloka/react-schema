@@ -92,7 +92,7 @@ export class FormComponent extends React.PureComponent<FormProps, FormState> {
     }
     return null;
   };
-  public setValue = (values: { [name: string]: any }): any => {
+  public setValue = (values: { [name: string]: any } = {}): any => {
     Object.entries(values).map(([name, value]) =>
       this.setValueField(name, value)
     );
