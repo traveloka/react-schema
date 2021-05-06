@@ -608,6 +608,16 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@traveloka/react-schema@^3.4.5-alpha.0":
+  version "3.4.5-alpha.0"
+  resolved "https://registry.yarnpkg.com/@traveloka/react-schema/-/react-schema-3.4.5-alpha.0.tgz#546e675e02afdf01e3b712f64ba4e39cb31d6c34"
+  integrity sha512-Uz+/Nn3vyF4GcFQ1yIBgV+AnnX1xkL5h74wE4QzkTpwdQdId5toPo9fjoUSUFqbeym8zcD6f44ifTqFq7F/TFg==
+
+"@traveloka/validation@^3.4.5-alpha.0":
+  version "3.4.5-alpha.0"
+  resolved "https://registry.yarnpkg.com/@traveloka/validation/-/validation-3.4.5-alpha.0.tgz#48e5116c9ea32e5bac6a4ba4680ff1cb400d8bf1"
+  integrity sha512-sLPVyKO4+tftqR7XliBnHOegixhFnqqZzYbmKnIIHytyj1PM9rEVl4S5/26fMJZSgK7/dYDOYeWIOi2f1qIqRQ==
+
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
   version "7.1.12"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.12.tgz#4d8e9e51eb265552a7e4f1ff2219ab6133bdfb2d"
@@ -2714,11 +2724,6 @@ lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.19, lodash@^4.17.21:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
-lodash@^4.17.21:
-  version "4.17.21"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
-
 loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
@@ -3886,8 +3891,9 @@ typescript@^3.9.9:
   integrity sha512-kdMjTiekY+z/ubJCATUPlRDl39vXYiMV9iyeMuEuXZh2we6zz80uovNN2WlAxmmdE/Z/YQe+EbOEXB5RHEED3w==
 
 ua-parser-js@^0.7.18:
-  version "0.7.18"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.18.tgz#a7bfd92f56edfb117083b69e31d2aa8882d4b1ed"
+  version "0.7.28"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
+  integrity sha512-6Gurc1n//gjp9eQNXjD9O3M/sMwVtN5S8Lv9bvOYBfKfDNiIIhqiyi01vMBO45u4zkDE420w/e0se7Vs+sIg+g==
 
 union-value@^1.0.0:
   version "1.0.0"
