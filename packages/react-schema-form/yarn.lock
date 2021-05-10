@@ -608,6 +608,16 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@traveloka/react-schema@^3.4.5-alpha.0":
+  version "3.4.5-alpha.0"
+  resolved "https://registry.yarnpkg.com/@traveloka/react-schema/-/react-schema-3.4.5-alpha.0.tgz#546e675e02afdf01e3b712f64ba4e39cb31d6c34"
+  integrity sha512-Uz+/Nn3vyF4GcFQ1yIBgV+AnnX1xkL5h74wE4QzkTpwdQdId5toPo9fjoUSUFqbeym8zcD6f44ifTqFq7F/TFg==
+
+"@traveloka/validation@^3.4.5-alpha.0":
+  version "3.4.5-alpha.0"
+  resolved "https://registry.yarnpkg.com/@traveloka/validation/-/validation-3.4.5-alpha.0.tgz#48e5116c9ea32e5bac6a4ba4680ff1cb400d8bf1"
+  integrity sha512-sLPVyKO4+tftqR7XliBnHOegixhFnqqZzYbmKnIIHytyj1PM9rEVl4S5/26fMJZSgK7/dYDOYeWIOi2f1qIqRQ==
+
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
   version "7.1.12"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.12.tgz#4d8e9e51eb265552a7e4f1ff2219ab6133bdfb2d"
@@ -1867,8 +1877,9 @@ hasha@^5.0.0:
     type-fest "^0.8.0"
 
 hosted-git-info@^2.1.4:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.7.1.tgz#97f236977bd6e125408930ff6de3eec6281ec047"
+  version "2.8.9"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
+  integrity sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==
 
 html-encoding-sniffer@^2.0.1:
   version "2.0.1"
@@ -2710,11 +2721,6 @@ lodash.sortby@^4.7.0:
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
 
 lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.19, lodash@^4.17.21:
-  version "4.17.21"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
-
-lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
